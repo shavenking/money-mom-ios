@@ -18,13 +18,11 @@ class TagCollectionViewCell: UICollectionViewCell {
     private func addSubview(label: UILabel) {
         contentView.addSubview(label)
 
-        let margin = contentView.layoutMarginsGuide
-
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-        label.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: margin.topAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
+        label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
 
         label.lineBreakMode = .byTruncatingMiddle
     }

@@ -6,6 +6,7 @@ class QuickCreateViewController: UIViewController {
     }()
 
     var tags: [String] = []
+    var tagTextFieldText = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +66,11 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == tags.count {
-            return CGSize(width: 100, height: 50)
+            let cell = TagTextFieldCollectionViewCell()
+            cell.textField.text = tagTextFieldText
+            cell.textField.sizeToFit()
+
+            return CGSize(width: min(cell.textField.frame.width + cell.layoutMargins.left + cell.layoutMargins.right, tagCollectionView.frame.width / 2), height: 50)
         } else {
             let cell = TagCollectionViewCell()
             cell.label.text = tags[indexPath.row]
@@ -81,5 +86,10 @@ extension QuickCreateViewController: TagTextFieldDelegate {
         tags.append(tag)
         tagCollectionView.reloadData()
         tagCollectionView.scrollToItem(at: IndexPath(item: tags.count, section: 0), at: .bottom, animated: true)
+    }
+
+    func didChange(text: String) {
+        tagTextFieldText = text
+        tagCollectionView.collectionViewLayout.invalidateLayout()
     }
 }

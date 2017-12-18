@@ -2,12 +2,14 @@ import UIKit
 
 protocol TagTextFieldDelegate {
     func didAdd(tag: String)
+    func didChange(text: String)
 }
 
 class TagTextFieldCollectionViewCell: UICollectionViewCell {
     lazy var textField: UITextField = {
         var textField = UITextField()
         textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }()
 
@@ -26,13 +28,11 @@ class TagTextFieldCollectionViewCell: UICollectionViewCell {
     private func addSubview(textField: UITextField) {
         contentView.addSubview(textField)
 
-        let margin = contentView.layoutMarginsGuide
-
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-        textField.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: margin.topAnchor).isActive = true
-        textField.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
+        textField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        textField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        textField.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
+        textField.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
     }
 }
 
@@ -45,7 +45,12 @@ extension TagTextFieldCollectionViewCell: UITextFieldDelegate {
         delegate?.didAdd(tag: text.trimmingCharacters(in: .whitespacesAndNewlines))
 
         textField.text = ""
+        delegate?.didChange(text: "")
 
         return true
+    }
+
+    @objc func textFieldDidChange() {
+        delegate?.didChange(text: textField.text ?? "")
     }
 }
