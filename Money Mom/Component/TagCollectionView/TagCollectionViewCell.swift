@@ -25,5 +25,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         label.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
         label.topAnchor.constraint(equalTo: margin.topAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
+
+        label.lineBreakMode = .byTruncatingMiddle
     }
 }

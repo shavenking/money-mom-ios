@@ -1,7 +1,10 @@
 import UIKit
 
 class QuickCreateViewController: UIViewController {
-    let tagCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let tagCollectionView: UICollectionView = {
+        return UICollectionView(frame: CGRect.zero, collectionViewLayout: TagCollectionViewFlowLayout())
+    }()
+
     var tags: [String] = []
 
     override func viewDidLoad() {
@@ -59,11 +62,24 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? TagTextFieldCollectionViewCell)?.textField.becomeFirstResponder()
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row == tags.count {
+            return CGSize(width: 100, height: 50)
+        } else {
+            let cell = TagCollectionViewCell()
+            cell.label.text = tags[indexPath.row]
+            cell.label.sizeToFit()
+
+            return CGSize(width: min(cell.label.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
+        }
+    }
 }
 
 extension QuickCreateViewController: TagTextFieldDelegate {
     func didAdd(tag: String) {
         tags.append(tag)
         tagCollectionView.reloadData()
+        tagCollectionView.scrollToItem(at: IndexPath(item: tags.count, section: 0), at: .bottom, animated: true)
     }
 }
