@@ -7,6 +7,8 @@ class QuickCreateViewController: UIViewController {
 
     var tags: [String] = []
     var tagTextFieldText = ""
+    var startCreatingTags = false
+    var invisibleTagCollectionViewButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,23 @@ class QuickCreateViewController: UIViewController {
         tagCollectionView.delegate = self
         tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(TagCollectionViewCell.self))
         tagCollectionView.register(TagTextFieldCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(TagTextFieldCollectionViewCell.self))
+
+        view.addSubview(invisibleTagCollectionViewButton)
+        invisibleTagCollectionViewButton.translatesAutoresizingMaskIntoConstraints = false
+        invisibleTagCollectionViewButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        invisibleTagCollectionViewButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        invisibleTagCollectionViewButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
+        invisibleTagCollectionViewButton.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
+
+        invisibleTagCollectionViewButton.addTarget(self, action: #selector(userWannaCreateTags), for: .touchUpInside)
+    }
+}
+
+extension QuickCreateViewController {
+    @objc func userWannaCreateTags() {
+        invisibleTagCollectionViewButton.isHidden = true
+        (tagCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? TagTextFieldCollectionViewCell)?.textField.becomeFirstResponder()
+        startCreatingTags = true
     }
 }
 
@@ -62,7 +81,9 @@ extension QuickCreateViewController: UICollectionViewDataSource {
 
 extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as? TagTextFieldCollectionViewCell)?.textField.becomeFirstResponder()
+        if startCreatingTags, cell is TagTextFieldCollectionViewCell {
+            (cell as? TagTextFieldCollectionViewCell)?.textField.becomeFirstResponder()
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
