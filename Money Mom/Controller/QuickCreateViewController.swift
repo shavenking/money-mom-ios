@@ -53,6 +53,7 @@ extension QuickCreateViewController: UICollectionViewDataSource {
 
             cell.backgroundColor = MMColor.white
             cell.label.text = tags[indexPath.row]
+            cell.delegate = self
 
             return cell
         }
@@ -76,7 +77,7 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
             cell.label.text = tags[indexPath.row]
             cell.label.sizeToFit()
 
-            return CGSize(width: min(cell.label.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
+            return CGSize(width: min(cell.label.frame.width + cell.button.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
         }
     }
 }
@@ -91,5 +92,13 @@ extension QuickCreateViewController: TagTextFieldDelegate {
     func didChange(text: String) {
         tagTextFieldText = text
         tagCollectionView.collectionViewLayout.invalidateLayout()
+    }
+}
+
+extension QuickCreateViewController: TagCollectionViewCellDelegate {
+    func didTouchButton(in tag: TagCollectionViewCell) {
+        tags = tags.filter { $0 != tag.label.text }
+        tagCollectionView.reloadData()
+        tagCollectionView.scrollToItem(at: IndexPath(item: tags.count, section: 0), at: .bottom, animated: true)
     }
 }
