@@ -37,7 +37,7 @@ extension QuickCreateViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == tags.count {
+        if indexPath.row == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(TagTextFieldCollectionViewCell.self), for: indexPath) as? TagTextFieldCollectionViewCell else {
                 fatalError()
             }
@@ -52,7 +52,7 @@ extension QuickCreateViewController: UICollectionViewDataSource {
             }
 
             cell.backgroundColor = MMColor.white
-            cell.label.text = tags[indexPath.row]
+            cell.label.text = tags[indexPath.row - 1]
             cell.delegate = self
 
             return cell
@@ -66,7 +66,7 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row == tags.count {
+        if indexPath.row == 0 {
             let cell = TagTextFieldCollectionViewCell()
             cell.textField.text = tagTextFieldText
             cell.textField.sizeToFit()
@@ -74,7 +74,7 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: min(cell.textField.frame.width + cell.layoutMargins.left + cell.layoutMargins.right, tagCollectionView.frame.width / 2), height: 50)
         } else {
             let cell = TagCollectionViewCell()
-            cell.label.text = tags[indexPath.row]
+            cell.label.text = tags[indexPath.row - 1]
             cell.label.sizeToFit()
 
             return CGSize(width: min(cell.label.frame.width + cell.button.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
@@ -84,9 +84,8 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
 
 extension QuickCreateViewController: TagTextFieldDelegate {
     func didAdd(tag: String) {
-        tags.append(tag)
+        tags.insert(tag, at: 0)
         tagCollectionView.reloadData()
-        tagCollectionView.scrollToItem(at: IndexPath(item: tags.count, section: 0), at: .bottom, animated: true)
     }
 
     func didChange(text: String) {
@@ -99,6 +98,5 @@ extension QuickCreateViewController: TagCollectionViewCellDelegate {
     func didTouchButton(in tag: TagCollectionViewCell) {
         tags = tags.filter { $0 != tag.label.text }
         tagCollectionView.reloadData()
-        tagCollectionView.scrollToItem(at: IndexPath(item: tags.count, section: 0), at: .bottom, animated: true)
     }
 }
