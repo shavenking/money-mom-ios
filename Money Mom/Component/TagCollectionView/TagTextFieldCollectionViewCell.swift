@@ -7,8 +7,16 @@ protocol TagTextFieldDelegate {
 
 class TagTextFieldCollectionViewCell: UICollectionViewCell {
     lazy var textField: UITextField = {
+        let label = UILabel()
+        label.text = "標籤："
+        label.sizeToFit()
+        label.textColor = MMColor.black
+
         var textField = UITextField()
+        textField.leftView = label
+        textField.leftViewMode = .always
         textField.delegate = self
+        textField.textColor = MMColor.black
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }()
@@ -19,6 +27,9 @@ class TagTextFieldCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
 
         addSubview(textField: textField)
+
+        layer.cornerRadius = 4
+        layer.masksToBounds = true
     }
 
     required init?(coder aDecoder: NSCoder) {

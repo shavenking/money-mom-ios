@@ -21,11 +21,11 @@ class QuickCreateViewController: UIViewController {
     private func addSubview(tagCollectionView: UICollectionView) {
         view.addSubview(tagCollectionView)
         tagCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        tagCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tagCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tagCollectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
+        tagCollectionView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        tagCollectionView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
+        tagCollectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 8).isActive = true
         tagCollectionView.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
-        tagCollectionView.backgroundColor = MMColor.black
+        tagCollectionView.backgroundColor = MMColor.white
         tagCollectionView.dataSource = self
         tagCollectionView.delegate = self
         tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(TagCollectionViewCell.self))
@@ -33,8 +33,8 @@ class QuickCreateViewController: UIViewController {
 
         view.addSubview(invisibleTagCollectionViewButton)
         invisibleTagCollectionViewButton.translatesAutoresizingMaskIntoConstraints = false
-        invisibleTagCollectionViewButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        invisibleTagCollectionViewButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        invisibleTagCollectionViewButton.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        invisibleTagCollectionViewButton.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
         invisibleTagCollectionViewButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
         invisibleTagCollectionViewButton.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
 
@@ -61,7 +61,6 @@ extension QuickCreateViewController: UICollectionViewDataSource {
                 fatalError()
             }
 
-            cell.backgroundColor = MMColor.red
             cell.delegate = self
 
             return cell
@@ -70,7 +69,6 @@ extension QuickCreateViewController: UICollectionViewDataSource {
                 fatalError()
             }
 
-            cell.backgroundColor = MMColor.white
             cell.label.text = tags[indexPath.row - 1]
             cell.delegate = self
 

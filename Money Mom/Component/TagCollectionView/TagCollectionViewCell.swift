@@ -5,7 +5,11 @@ protocol TagCollectionViewCellDelegate {
 }
 
 class TagCollectionViewCell: UICollectionViewCell {
-    let label = UILabel()
+    let label: UILabel = {
+        let label = UILabel()
+        label.textColor = MMColor.white
+        return label
+    }()
 
     let button: UIButton = {
         var button = UIButton()
@@ -21,6 +25,11 @@ class TagCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
 
         addSubviews()
+
+        layer.cornerRadius = 4
+        layer.masksToBounds = true
+
+        backgroundColor = MMColor.blue
     }
 
     required init?(coder aDecoder: NSCoder) {
