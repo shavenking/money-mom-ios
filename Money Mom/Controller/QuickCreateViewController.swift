@@ -1,9 +1,45 @@
 import UIKit
+import AVFoundation
 
 class QuickCreateViewController: UIViewController {
     let tagCollectionView: UICollectionView = {
         return UICollectionView(frame: CGRect.zero, collectionViewLayout: TagCollectionViewFlowLayout())
     }()
+
+    let recordButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("按住我錄音", for: .normal)
+        button.setTitleColor(MMColor.white, for: .normal)
+        button.backgroundColor = MMColor.black
+        button.layer.cornerRadius = 4
+        button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(startRecording), for: .touchDown)
+        button.addTarget(self, action: #selector(stopRecording), for: .touchUpInside)
+        button.addTarget(self, action: #selector(stopRecording), for: .touchUpOutside)
+        return button
+    }()
+
+    let documentDirectory: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+
+    lazy var audioRecorder: AVAudioRecorder? = {
+        guard let documentDirectory = documentDirectory else {
+            return nil
+        }
+
+        var audioRecorder =  try! AVAudioRecorder(url: documentDirectory.appendingPathComponent("recording.m4a"), settings: [
+            AVFormatIDKey: kAudioFormatMPEG4AAC,
+            AVSampleRateKey: 44100,
+            AVNumberOfChannelsKey: 2,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ])
+
+        audioRecorder.delegate = self
+        audioRecorder.prepareToRecord()
+
+        return audioRecorder
+    }()
+
+    var player: AVAudioPlayer?
 
     var tags: [String] = []
     var tagTextFieldText = ""
@@ -15,10 +51,10 @@ class QuickCreateViewController: UIViewController {
 
         view.backgroundColor = MMColor.white
 
-        addSubview(tagCollectionView: tagCollectionView)
+        addSubviews()
     }
 
-    private func addSubview(tagCollectionView: UICollectionView) {
+    private func addSubviews() {
         view.addSubview(tagCollectionView)
         tagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         tagCollectionView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
@@ -39,6 +75,13 @@ class QuickCreateViewController: UIViewController {
         invisibleTagCollectionViewButton.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
 
         invisibleTagCollectionViewButton.addTarget(self, action: #selector(userWannaCreateTags), for: .touchUpInside)
+
+        view.addSubview(recordButton)
+        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        recordButton.topAnchor.constraint(equalTo: tagCollectionView.bottomAnchor, constant: 10).isActive = true
+        recordButton.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        recordButton.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
+        recordButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
 
@@ -117,5 +160,51 @@ extension QuickCreateViewController: TagCollectionViewCellDelegate {
     func didTouchButton(in tag: TagCollectionViewCell) {
         tags = tags.filter { $0 != tag.label.text }
         tagCollectionView.reloadData()
+    }
+}
+
+extension QuickCreateViewController: AVAudioRecorderDelegate {
+    @objc func startRecording() {
+        let session = AVAudioSession.sharedInstance()
+
+        session.requestRecordPermission { allowed in
+            if allowed {
+                do {
+                    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+                    try session.setActive(true)
+                } catch {
+                    fatalError("failed to start recording")
+                }
+
+                self.audioRecorder?.record()
+                self.recordButton.backgroundColor = MMColor.red
+                self.recordButton.setTitleColor(MMColor.white, for: .normal)
+                self.recordButton.setTitle("放開結束錄音", for: .normal)
+            }
+        }
+    }
+
+    @objc func stopRecording() {
+        audioRecorder?.stop()
+    }
+
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if flag {
+            recordButton.backgroundColor = MMColor.black
+            recordButton.setTitleColor(MMColor.white, for: .normal)
+            recordButton.setTitle("按住我錄音", for: .normal)
+
+            guard let documentDirectory = documentDirectory else {
+                return
+            }
+
+            do {
+                player = try AVAudioPlayer(contentsOf: documentDirectory.appendingPathComponent("recording.m4a"))
+                player?.prepareToPlay()
+                player?.play()
+            } catch {
+                fatalError("Cannot play audio")
+            }
+        }
     }
 }
