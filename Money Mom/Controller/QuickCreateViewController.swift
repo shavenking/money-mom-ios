@@ -1,6 +1,10 @@
 import UIKit
 import AVFoundation
 
+protocol QuickRecordDelegate {
+    func didAdd(quickRecord: QuickRecord)
+}
+
 class QuickCreateViewController: UIViewController {
     let amountTextField: UITextField = {
         let label = UILabel()
@@ -59,11 +63,14 @@ class QuickCreateViewController: UIViewController {
     var tagTextFieldText = ""
     var startCreatingTags = false
     var invisibleTagCollectionViewButton = UIButton()
+    var delegate: QuickRecordDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = MMColor.white
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
 
         addSubviews()
     }
@@ -111,6 +118,14 @@ extension QuickCreateViewController {
         invisibleTagCollectionViewButton.isHidden = true
         (tagCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? TagTextFieldCollectionViewCell)?.textField.becomeFirstResponder()
         startCreatingTags = true
+    }
+
+    @objc func save() {
+        let quickRecord = QuickRecord(amount: amountTextField.text ?? "", tags: tags, audioRecording: "recording.m4a")
+
+        delegate?.didAdd(quickRecord: quickRecord)
+
+        navigationController?.popViewController(animated: true)
     }
 }
 
