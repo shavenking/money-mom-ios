@@ -3,6 +3,7 @@ import UIKit
 protocol TagTextFieldDelegate {
     func didAdd(tag: String)
     func didChange(text: String)
+    func didEndEditing()
 }
 
 class TagTextFieldCollectionViewCell: UICollectionViewCell {
@@ -40,10 +41,9 @@ class TagTextFieldCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(textField)
 
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         textField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        textField.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
-        textField.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
+        textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     }
 }
 
@@ -63,5 +63,9 @@ extension TagTextFieldCollectionViewCell: UITextFieldDelegate {
 
     @objc func textFieldDidChange() {
         delegate?.didChange(text: textField.text ?? "")
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.didEndEditing()
     }
 }

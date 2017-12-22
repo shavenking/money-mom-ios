@@ -2,6 +2,20 @@ import UIKit
 import AVFoundation
 
 class QuickCreateViewController: UIViewController {
+    let amountTextField: UITextField = {
+        let label = UILabel()
+        label.text = "金額："
+        label.sizeToFit()
+        label.textColor = MMColor.black
+
+        var textField = UITextField()
+        textField.leftView = label
+        textField.leftViewMode = .always
+        textField.textColor = MMColor.black
+        textField.backgroundColor = MMColor.white
+        return textField
+    }()
+
     let tagCollectionView: UICollectionView = {
         return UICollectionView(frame: CGRect.zero, collectionViewLayout: TagCollectionViewFlowLayout())
     }()
@@ -55,11 +69,18 @@ class QuickCreateViewController: UIViewController {
     }
 
     private func addSubviews() {
+        view.addSubview(amountTextField)
+        amountTextField.translatesAutoresizingMaskIntoConstraints = false
+        amountTextField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
+        amountTextField.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        amountTextField.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
+        amountTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
         view.addSubview(tagCollectionView)
         tagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         tagCollectionView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
         tagCollectionView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
-        tagCollectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 8).isActive = true
+        tagCollectionView.topAnchor.constraint(equalTo: amountTextField.bottomAnchor, constant: 10).isActive = true
         tagCollectionView.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
         tagCollectionView.backgroundColor = MMColor.white
         tagCollectionView.dataSource = self
@@ -69,10 +90,10 @@ class QuickCreateViewController: UIViewController {
 
         view.addSubview(invisibleTagCollectionViewButton)
         invisibleTagCollectionViewButton.translatesAutoresizingMaskIntoConstraints = false
-        invisibleTagCollectionViewButton.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
-        invisibleTagCollectionViewButton.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
-        invisibleTagCollectionViewButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-        invisibleTagCollectionViewButton.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
+        invisibleTagCollectionViewButton.leftAnchor.constraint(equalTo: tagCollectionView.leftAnchor).isActive = true
+        invisibleTagCollectionViewButton.rightAnchor.constraint(equalTo: tagCollectionView.rightAnchor).isActive = true
+        invisibleTagCollectionViewButton.topAnchor.constraint(equalTo: tagCollectionView.topAnchor).isActive = true
+        invisibleTagCollectionViewButton.bottomAnchor.constraint(equalTo: tagCollectionView.bottomAnchor).isActive = true
 
         invisibleTagCollectionViewButton.addTarget(self, action: #selector(userWannaCreateTags), for: .touchUpInside)
 
@@ -153,6 +174,10 @@ extension QuickCreateViewController: TagTextFieldDelegate {
     func didChange(text: String) {
         tagTextFieldText = text
         tagCollectionView.collectionViewLayout.invalidateLayout()
+    }
+
+    func didEndEditing() {
+        invisibleTagCollectionViewButton.isHidden = false
     }
 }
 
