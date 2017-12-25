@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showQuickCreateViewController))
 
         quickRecordTableView.dataSource = self
-        quickRecordTableView.rowHeight = 50
+        quickRecordTableView.rowHeight = 160
         quickRecordTableView.separatorStyle = .none
         quickRecordTableView.register(QuickRecordTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(QuickRecordTableViewCell.self))
 
@@ -41,11 +41,8 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(QuickRecordTableViewCell.self), for: indexPath) as! QuickRecordTableViewCell
 
-        cell.amountLabel.text = quickRecords[indexPath.row].amount
-        cell.amountLabel.sizeToFit()
-
-        cell.tagsLabel.text = quickRecords[indexPath.row].tags?.joined(separator: ", ")
-        cell.tagsLabel.sizeToFit()
+        cell.amountLabel.text = "$" + (quickRecords[indexPath.row].amount ?? "")
+        cell.tags = quickRecords[indexPath.row].tags ?? []
 
         return cell
     }

@@ -16,6 +16,7 @@
 		69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */; };
 		69D603B0EEDE6E7D789210CD /* QuickCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */; };
 		69D604F5E0044D5A929762ED /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */; };
+		69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */; };
 		69D60ECFD60C5EC8BACACB68 /* MMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60AD6C648502F3B79F564 /* MMColor.swift */; };
 		69D60F6ABE0138C6DAC95E80 /* TagTextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickCreateViewController.swift; sourceTree = "<group>"; };
 		69D60AD6C648502F3B79F564 /* MMColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMColor.swift; sourceTree = "<group>"; };
 		69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadOnlyTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D60DC3645798317C910CFD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */,
 				69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */,
 				69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */,
+				69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */,
 			);
 			path = TagCollectionView;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */,
 				69D602D71075186817E2C891 /* QuickRecord.swift in Sources */,
 				69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */,
+				69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
