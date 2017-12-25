@@ -1,9 +1,12 @@
 import UIKit
+import AVFoundation
 
 class HomeViewController: UIViewController {
     let quickRecordTableView = UITableView()
 
     var quickRecords = [QuickRecord]()
+
+    let documentDirectory: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,6 +18,7 @@ class HomeViewController: UIViewController {
         quickRecordTableView.dataSource = self
         quickRecordTableView.rowHeight = 160
         quickRecordTableView.separatorStyle = .none
+        quickRecordTableView.allowsSelection = false
         quickRecordTableView.register(QuickRecordTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(QuickRecordTableViewCell.self))
 
         view.addSubview(quickRecordTableView)
@@ -43,6 +47,14 @@ extension HomeViewController: UITableViewDataSource {
 
         cell.amountLabel.text = "$" + (quickRecords[indexPath.row].amount ?? "")
         cell.tags = quickRecords[indexPath.row].tags ?? []
+
+        if let documentDirectory = documentDirectory, let audioRecording = quickRecords[indexPath.row].audioRecording {
+            do {
+                cell.player = try AVAudioPlayer(contentsOf: documentDirectory.appendingPathComponent(audioRecording))
+            } catch {
+                cell.player = nil
+            }
+        }
 
         return cell
     }

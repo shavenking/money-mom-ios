@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 
 class QuickRecordTableViewCell: UITableViewCell {
     let amountLabel: UILabel = {
@@ -22,6 +23,7 @@ class QuickRecordTableViewCell: UITableViewCell {
         didSet {
             if tags.isEmpty {
                 tagCollectionView.backgroundColor = MMColor.black.withAlphaComponent(0.1)
+                tagCollectionView.reloadData()
             } else {
                 tagCollectionView.backgroundColor = MMColor.white
                 tagCollectionView.reloadData()
@@ -34,6 +36,18 @@ class QuickRecordTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         return UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
     }()
+
+    var player: AVAudioPlayer? {
+        didSet {
+            if player == nil {
+                playButton.setTitle("⤫", for: .normal)
+                playButton.isUserInteractionEnabled = false
+            } else {
+                playButton.setTitle("▶", for: .normal)
+                playButton.isUserInteractionEnabled = true
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,6 +77,7 @@ class QuickRecordTableViewCell: UITableViewCell {
         playButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         playButton.setContentCompressionResistancePriority(.required, for: .vertical)
+        playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
 
         amountLabel.translatesAutoresizingMaskIntoConstraints = false
         amountLabel.topAnchor.constraint(equalTo: topInnerView.layoutMarginsGuide.topAnchor).isActive = true
@@ -111,5 +126,11 @@ extension QuickRecordTableViewCell: UICollectionViewDataSource, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.zero
+    }
+}
+
+extension QuickRecordTableViewCell {
+    @objc func playAudio() {
+        player?.play()
     }
 }

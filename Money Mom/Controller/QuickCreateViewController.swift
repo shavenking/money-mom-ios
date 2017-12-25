@@ -39,12 +39,16 @@ class QuickCreateViewController: UIViewController {
 
     let documentDirectory: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
 
+    lazy var audioFileName: String = {
+        return UUID().uuidString
+    }()
+
     lazy var audioRecorder: AVAudioRecorder? = {
         guard let documentDirectory = documentDirectory else {
             return nil
         }
 
-        var audioRecorder =  try! AVAudioRecorder(url: documentDirectory.appendingPathComponent("recording.m4a"), settings: [
+        var audioRecorder =  try! AVAudioRecorder(url: documentDirectory.appendingPathComponent(audioFileName), settings: [
             AVFormatIDKey: kAudioFormatMPEG4AAC,
             AVSampleRateKey: 44100,
             AVNumberOfChannelsKey: 2,
@@ -121,7 +125,7 @@ extension QuickCreateViewController {
     }
 
     @objc func save() {
-        let quickRecord = QuickRecord(amount: amountTextField.text ?? "", tags: tags, audioRecording: "recording.m4a")
+        let quickRecord = QuickRecord(amount: amountTextField.text ?? "", tags: tags, audioRecording: audioFileName)
 
         delegate?.didAdd(quickRecord: quickRecord)
 
@@ -239,7 +243,7 @@ extension QuickCreateViewController: AVAudioRecorderDelegate {
             }
 
             do {
-                player = try AVAudioPlayer(contentsOf: documentDirectory.appendingPathComponent("recording.m4a"))
+                player = try AVAudioPlayer(contentsOf: documentDirectory.appendingPathComponent(audioFileName))
                 player?.prepareToPlay()
                 player?.play()
             } catch {
