@@ -2,7 +2,11 @@ import UIKit
 import AVFoundation
 
 class HomeViewController: UIViewController {
-    let quickRecordTableView = UITableView()
+    lazy var quickRecordTableView: QuickRecordTableView = {
+        var tableView = QuickRecordTableView()
+        tableView.dataSource = self
+        return tableView
+    }()
 
     var quickRecords = [QuickRecord]()
 
@@ -12,12 +16,6 @@ class HomeViewController: UIViewController {
         view.backgroundColor = MMColor.white
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showQuickCreateViewController))
-
-        quickRecordTableView.dataSource = self
-        quickRecordTableView.rowHeight = 160
-        quickRecordTableView.separatorStyle = .none
-        quickRecordTableView.allowsSelection = false
-        quickRecordTableView.register(QuickRecordTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(QuickRecordTableViewCell.self))
 
         view.addSubview(quickRecordTableView)
         quickRecordTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +39,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(QuickRecordTableViewCell.self), for: indexPath) as! QuickRecordTableViewCell
+        let cell = (tableView as! QuickRecordTableView).dequeueReusableCell(for: indexPath)
 
         cell.amountLabel.text = "$" + (quickRecords[indexPath.row].amount ?? "")
         cell.tags = quickRecords[indexPath.row].tags ?? []
