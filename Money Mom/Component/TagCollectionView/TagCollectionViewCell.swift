@@ -36,7 +36,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func addSubviews() {
+    internal func addSubviews() {
         contentView.addSubview(label)
         contentView.addSubview(button)
 
