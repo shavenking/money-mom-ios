@@ -16,7 +16,7 @@ class QuickRecordTableViewCell: UITableViewCell {
         }
     }
 
-    var tags = [String]() {
+    var tags = Set<String>() {
         didSet {
             if tags.isEmpty {
                 tagCollectionView.backgroundColor = MMColor.black.withAlphaComponent(0.1)
@@ -42,10 +42,10 @@ class QuickRecordTableViewCell: UITableViewCell {
                 return
             }
 
-            amountLabel.text = "$" + (quickRecord.amount ?? "")
-            tags = quickRecord.tags ?? []
+            amountLabel.text = "$\(quickRecord.amount)"
+            tags = quickRecord.tags
 
-            if let audioUUID = quickRecord.audioUUID, let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
+            if let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
                 } catch {
@@ -112,14 +112,14 @@ extension QuickRecordTableViewCell: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forReadOnlyTagAt: indexPath)
 
-        cell.tagData = tags[indexPath.row]
+        cell.tagData = tags.sorted()[indexPath.row]
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cell = ReadOnlyTagCollectionViewCell()
-        cell.tagData = tags[indexPath.row]
+        cell.tagData = tags.sorted()[indexPath.row]
 
         return CGSize(width: min(cell.label.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
     }

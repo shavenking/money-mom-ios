@@ -6,6 +6,8 @@ protocol QuickRecordDelegate {
 }
 
 class QuickCreateViewController: UIViewController {
+    let quickRecord = QuickRecord()
+
     let amountTextField = AmountTextField()
 
     lazy var tagCollectionView: TagCollectionView = {
@@ -22,10 +24,8 @@ class QuickCreateViewController: UIViewController {
         return button
     }()
 
-    var audioUUID = UUID()
-
     lazy var audioRecorder: AVAudioRecorder? = {
-        guard let audioFilePath = MMConfig.audioFilePath(of: audioUUID) else {
+        guard let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) else {
             return nil
         }
 
@@ -43,7 +43,7 @@ class QuickCreateViewController: UIViewController {
 
     var player: AVAudioPlayer?
 
-    var tags: [String] = []
+    var tags = Set<String>()
     var tagTextFieldText = ""
     var startCreatingTags = false
     var delegate: QuickRecordDelegate?
@@ -89,7 +89,8 @@ extension QuickCreateViewController {
     }
 
     @objc func save() {
-        let quickRecord = QuickRecord(amount: amountTextField.text ?? "", tags: tags, audioUUID: audioUUID)
+        quickRecord.amount = amountTextField.text ?? "0"
+        quickRecord.tags = tags
 
         delegate?.didAdd(quickRecord: quickRecord)
 
@@ -112,7 +113,7 @@ extension QuickCreateViewController: UICollectionViewDataSource {
         } else {
             let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forTagAt: indexPath)
 
-            cell.tagData = tags[indexPath.row - 1]
+            cell.tagData = tags.sorted()[indexPath.row - 1]
             cell.delegate = self
 
             return cell
@@ -135,7 +136,7 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: min(cell.textField.frame.width + cell.layoutMargins.left + cell.layoutMargins.right, tagCollectionView.frame.width / 2), height: 50)
         } else {
             let cell = TagCollectionViewCell()
-            cell.tagData = tags[indexPath.row - 1]
+            cell.tagData = tags.sorted()[indexPath.row - 1]
             cell.label.sizeToFit()
 
             return CGSize(width: min(cell.label.frame.width + cell.button.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
@@ -145,7 +146,7 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
 
 extension QuickCreateViewController: TagTextFieldDelegate {
     func didAdd(tag: String) {
-        tags.insert(tag, at: 0)
+        tags.insert(tag)
         tagCollectionView.reloadData()
     }
 
@@ -157,8 +158,10 @@ extension QuickCreateViewController: TagTextFieldDelegate {
 
 extension QuickCreateViewController: TagCollectionViewCellDelegate {
     func didTouchButton(in tag: TagCollectionViewCell) {
-        tags = tags.filter { $0 != tag.label.text }
-        tagCollectionView.reloadData()
+        if let tag = tag.tagData {
+            tags.remove(tag)
+            tagCollectionView.reloadData()
+        }
     }
 }
 
@@ -189,7 +192,7 @@ extension QuickCreateViewController: RecordButtonDelegate, AVAudioRecorderDelega
         recordButton.setDefaultStyle()
 
         if flag {
-            if let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
+            if let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
                     player?.prepareToPlay()
