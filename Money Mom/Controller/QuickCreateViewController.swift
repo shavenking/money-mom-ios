@@ -12,16 +12,9 @@ class QuickCreateViewController: UIViewController {
         return UICollectionView(frame: CGRect.zero, collectionViewLayout: TagCollectionViewFlowLayout())
     }()
 
-    let recordButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("按住我錄音", for: .normal)
-        button.setTitleColor(MMColor.white, for: .normal)
-        button.backgroundColor = MMColor.black
-        button.layer.cornerRadius = 4
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(startRecording), for: .touchDown)
-        button.addTarget(self, action: #selector(stopRecording), for: .touchUpInside)
-        button.addTarget(self, action: #selector(stopRecording), for: .touchUpOutside)
+    lazy var recordButton: RecordButton = {
+        var button = RecordButton()
+        button.delegate = self
         return button
     }()
 
@@ -195,8 +188,8 @@ extension QuickCreateViewController: TagCollectionViewCellDelegate {
     }
 }
 
-extension QuickCreateViewController: AVAudioRecorderDelegate {
-    @objc func startRecording() {
+extension QuickCreateViewController: RecordButtonDelegate, AVAudioRecorderDelegate {
+    func userWannaStartRecording() {
         let session = AVAudioSession.sharedInstance()
 
         session.requestRecordPermission { allowed in
@@ -209,23 +202,19 @@ extension QuickCreateViewController: AVAudioRecorderDelegate {
                 }
 
                 self.audioRecorder?.record()
-                self.recordButton.backgroundColor = MMColor.red
-                self.recordButton.setTitleColor(MMColor.white, for: .normal)
-                self.recordButton.setTitle("放開結束錄音", for: .normal)
+                self.recordButton.setStyleForRecording()
             }
         }
     }
 
-    @objc func stopRecording() {
+    func userWannaStopRecording() {
         audioRecorder?.stop()
     }
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if flag {
-            recordButton.backgroundColor = MMColor.black
-            recordButton.setTitleColor(MMColor.white, for: .normal)
-            recordButton.setTitle("按住我錄音", for: .normal)
+        recordButton.setDefaultStyle()
 
+        if flag {
             if let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)

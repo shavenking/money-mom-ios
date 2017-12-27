@@ -13,6 +13,7 @@
 		69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */; };
 		69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6094CEF6424B731247185 /* MMConfig.swift */; };
 		69D601D6701D4D9A5E75EC62 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60DC3645798317C910CFD /* HomeViewController.swift */; };
+		69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6084BCF294D8C618FDBAA /* RecordButton.swift */; };
 		69D602D71075186817E2C891 /* QuickRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6053181973856242A39C0 /* QuickRecord.swift */; };
 		69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */; };
 		69D603B0EEDE6E7D789210CD /* QuickCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */; };
@@ -35,6 +36,7 @@
 		69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D6053181973856242A39C0 /* QuickRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecord.swift; sourceTree = "<group>"; };
+		69D6084BCF294D8C618FDBAA /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickCreateViewController.swift; sourceTree = "<group>"; };
 		69D6094CEF6424B731247185 /* MMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMConfig.swift; sourceTree = "<group>"; };
 		69D60A2A313A58787DF9F847 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				69D603FBDD7005D55280DA12 /* TagCollectionView */,
 				69D60A109F1D80D43B1D4C7A /* QuickRecordTableView */,
 				69D60C1D5040A1D4DB8D47A4 /* AmountTextField */,
+				69D60ABA17A5E25A604DF970 /* RecordButton */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -132,6 +135,14 @@
 				69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */,
 			);
 			path = QuickRecordTableView;
+			sourceTree = "<group>";
+		};
+		69D60ABA17A5E25A604DF970 /* RecordButton */ = {
+			isa = PBXGroup;
+			children = (
+				69D6084BCF294D8C618FDBAA /* RecordButton.swift */,
+			);
+			path = RecordButton;
 			sourceTree = "<group>";
 		};
 		69D60C1D5040A1D4DB8D47A4 /* AmountTextField */ = {
@@ -226,6 +237,7 @@
 				69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */,
 				69D609814834B9A86D8C7D47 /* QuickRecordTableView.swift in Sources */,
 				69D60BDBC4A87DCDE73F03D4 /* AmountTextField.swift in Sources */,
+				69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
