@@ -26,12 +26,7 @@ class QuickCreateViewController: UIViewController {
         }
 
         do {
-            var audioRecorder =  try AVAudioRecorder(url: audioFilePath, settings: [
-                AVFormatIDKey: kAudioFormatMPEG4AAC,
-                AVSampleRateKey: 44100,
-                AVNumberOfChannelsKey: 2,
-                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-            ])
+            var audioRecorder =  try AVAudioRecorder(url: audioFilePath, settings: MMConfig.recordingSettings)
 
             audioRecorder.delegate = self
             audioRecorder.prepareToRecord()
