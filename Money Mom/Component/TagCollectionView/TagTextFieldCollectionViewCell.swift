@@ -24,6 +24,13 @@ class TagTextFieldCollectionViewCell: UICollectionViewCell {
 
     var delegate: TagTextFieldDelegate?
 
+    var text: String? {
+        didSet {
+            textField.text = text
+            textField.sizeToFit()
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 

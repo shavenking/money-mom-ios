@@ -112,7 +112,7 @@ extension QuickCreateViewController: UICollectionViewDataSource {
         } else {
             let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forTagAt: indexPath)
 
-            cell.label.text = tags[indexPath.row - 1]
+            cell.tagData = tags[indexPath.row - 1]
             cell.delegate = self
 
             return cell
@@ -130,13 +130,12 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
             let cell = TagTextFieldCollectionViewCell()
-            cell.textField.text = tagTextFieldText
-            cell.textField.sizeToFit()
+            cell.text = tagTextFieldText
 
             return CGSize(width: min(cell.textField.frame.width + cell.layoutMargins.left + cell.layoutMargins.right, tagCollectionView.frame.width / 2), height: 50)
         } else {
             let cell = TagCollectionViewCell()
-            cell.label.text = tags[indexPath.row - 1]
+            cell.tagData = tags[indexPath.row - 1]
             cell.label.sizeToFit()
 
             return CGSize(width: min(cell.label.frame.width + cell.button.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);

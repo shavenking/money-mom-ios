@@ -41,16 +41,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView as! QuickRecordTableView).dequeueReusableCell(for: indexPath)
 
-        cell.amountLabel.text = "$" + (quickRecords[indexPath.row].amount ?? "")
-        cell.tags = quickRecords[indexPath.row].tags ?? []
-
-        if let audioUUID = quickRecords[indexPath.row].audioUUID, let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
-            do {
-                cell.player = try AVAudioPlayer(contentsOf: audioFilePath)
-            } catch {
-                cell.player = nil
-            }
-        }
+        cell.quickRecord = quickRecords[indexPath.row]
 
         return cell
     }

@@ -36,6 +36,25 @@ class QuickRecordTableViewCell: UITableViewCell {
         return tagCollectionView
     }()
 
+    var quickRecord: QuickRecord? {
+        didSet {
+            guard let quickRecord = self.quickRecord else {
+                return
+            }
+
+            amountLabel.text = "$" + (quickRecord.amount ?? "")
+            tags = quickRecord.tags ?? []
+
+            if let audioUUID = quickRecord.audioUUID, let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
+                do {
+                    player = try AVAudioPlayer(contentsOf: audioFilePath)
+                } catch {
+                    player = nil
+                }
+            }
+        }
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -93,15 +112,14 @@ extension QuickRecordTableViewCell: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forReadOnlyTagAt: indexPath)
 
-        cell.label.text = tags[indexPath.row]
+        cell.tagData = tags[indexPath.row]
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cell = ReadOnlyTagCollectionViewCell()
-        cell.label.text = tags[indexPath.row]
-        cell.label.sizeToFit()
+        cell.tagData = tags[indexPath.row]
 
         return CGSize(width: min(cell.label.frame.width + cell.layoutMargins.right + cell.layoutMargins.left, tagCollectionView.frame.width / 2), height: 50);
     }

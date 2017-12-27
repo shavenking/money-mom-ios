@@ -21,6 +21,15 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     var delegate: TagCollectionViewCellDelegate?
 
+    var tagData: String? {
+        didSet {
+            if let tagData = self.tagData {
+                label.text = tagData
+                label.sizeToFit()
+            }
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
