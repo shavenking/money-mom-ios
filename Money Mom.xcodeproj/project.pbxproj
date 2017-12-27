@@ -18,6 +18,7 @@
 		69D603B0EEDE6E7D789210CD /* QuickCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */; };
 		69D604F5E0044D5A929762ED /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */; };
 		69D609814834B9A86D8C7D47 /* QuickRecordTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */; };
+		69D60BDBC4A87DCDE73F03D4 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60A2A313A58787DF9F847 /* AmountTextField.swift */; };
 		69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */; };
 		69D60ECFD60C5EC8BACACB68 /* MMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60AD6C648502F3B79F564 /* MMColor.swift */; };
 		69D60F6ABE0138C6DAC95E80 /* TagTextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */; };
@@ -36,6 +37,7 @@
 		69D6053181973856242A39C0 /* QuickRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecord.swift; sourceTree = "<group>"; };
 		69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickCreateViewController.swift; sourceTree = "<group>"; };
 		69D6094CEF6424B731247185 /* MMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMConfig.swift; sourceTree = "<group>"; };
+		69D60A2A313A58787DF9F847 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
 		69D60AD6C648502F3B79F564 /* MMColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMColor.swift; sourceTree = "<group>"; };
 		69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadOnlyTagCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				69D603FBDD7005D55280DA12 /* TagCollectionView */,
 				69D60A109F1D80D43B1D4C7A /* QuickRecordTableView */,
+				69D60C1D5040A1D4DB8D47A4 /* AmountTextField */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -129,6 +132,14 @@
 				69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */,
 			);
 			path = QuickRecordTableView;
+			sourceTree = "<group>";
+		};
+		69D60C1D5040A1D4DB8D47A4 /* AmountTextField */ = {
+			isa = PBXGroup;
+			children = (
+				69D60A2A313A58787DF9F847 /* AmountTextField.swift */,
+			);
+			path = AmountTextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 				69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */,
 				69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */,
 				69D609814834B9A86D8C7D47 /* QuickRecordTableView.swift in Sources */,
+				69D60BDBC4A87DCDE73F03D4 /* AmountTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

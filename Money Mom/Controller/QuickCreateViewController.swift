@@ -6,19 +6,7 @@ protocol QuickRecordDelegate {
 }
 
 class QuickCreateViewController: UIViewController {
-    let amountTextField: UITextField = {
-        let label = UILabel()
-        label.text = "金額："
-        label.sizeToFit()
-        label.textColor = MMColor.black
-
-        var textField = UITextField()
-        textField.leftView = label
-        textField.leftViewMode = .always
-        textField.textColor = MMColor.black
-        textField.backgroundColor = MMColor.white
-        return textField
-    }()
+    let amountTextField = AmountTextField()
 
     let tagCollectionView: UICollectionView = {
         return UICollectionView(frame: CGRect.zero, collectionViewLayout: TagCollectionViewFlowLayout())
