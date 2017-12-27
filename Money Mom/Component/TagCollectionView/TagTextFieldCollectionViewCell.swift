@@ -1,9 +1,9 @@
 import UIKit
 
-protocol TagTextFieldDelegate {
+@objc protocol TagTextFieldDelegate {
     func didAdd(tag: String)
     func didChange(text: String)
-    func didEndEditing()
+    @objc optional func didEndEditing()
 }
 
 class TagTextFieldCollectionViewCell: UICollectionViewCell {
@@ -66,6 +66,6 @@ extension TagTextFieldCollectionViewCell: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.didEndEditing()
+        delegate?.didEndEditing?()
     }
 }

@@ -8,8 +8,12 @@ protocol QuickRecordDelegate {
 class QuickCreateViewController: UIViewController {
     let amountTextField = AmountTextField()
 
-    let tagCollectionView: UICollectionView = {
-        return UICollectionView(frame: CGRect.zero, collectionViewLayout: TagCollectionViewFlowLayout())
+    lazy var tagCollectionView: TagCollectionView = {
+        var tagCollectionView = TagCollectionView()
+        tagCollectionView.dataSource = self
+        tagCollectionView.delegate = self
+        tagCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userWannaCreateTags)))
+        return tagCollectionView
     }()
 
     lazy var recordButton: RecordButton = {
@@ -42,7 +46,6 @@ class QuickCreateViewController: UIViewController {
     var tags: [String] = []
     var tagTextFieldText = ""
     var startCreatingTags = false
-    var invisibleTagCollectionViewButton = UIButton()
     var delegate: QuickRecordDelegate?
 
     override func viewDidLoad() {
@@ -69,20 +72,6 @@ class QuickCreateViewController: UIViewController {
         tagCollectionView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
         tagCollectionView.topAnchor.constraint(equalTo: amountTextField.bottomAnchor, constant: 10).isActive = true
         tagCollectionView.heightAnchor.constraint(equalToConstant: 44 * 3).isActive = true
-        tagCollectionView.backgroundColor = MMColor.white
-        tagCollectionView.dataSource = self
-        tagCollectionView.delegate = self
-        tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(TagCollectionViewCell.self))
-        tagCollectionView.register(TagTextFieldCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(TagTextFieldCollectionViewCell.self))
-
-        view.addSubview(invisibleTagCollectionViewButton)
-        invisibleTagCollectionViewButton.translatesAutoresizingMaskIntoConstraints = false
-        invisibleTagCollectionViewButton.leftAnchor.constraint(equalTo: tagCollectionView.leftAnchor).isActive = true
-        invisibleTagCollectionViewButton.rightAnchor.constraint(equalTo: tagCollectionView.rightAnchor).isActive = true
-        invisibleTagCollectionViewButton.topAnchor.constraint(equalTo: tagCollectionView.topAnchor).isActive = true
-        invisibleTagCollectionViewButton.bottomAnchor.constraint(equalTo: tagCollectionView.bottomAnchor).isActive = true
-
-        invisibleTagCollectionViewButton.addTarget(self, action: #selector(userWannaCreateTags), for: .touchUpInside)
 
         view.addSubview(recordButton)
         recordButton.translatesAutoresizingMaskIntoConstraints = false
@@ -95,7 +84,6 @@ class QuickCreateViewController: UIViewController {
 
 extension QuickCreateViewController {
     @objc func userWannaCreateTags() {
-        invisibleTagCollectionViewButton.isHidden = true
         (tagCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? TagTextFieldCollectionViewCell)?.textField.becomeFirstResponder()
         startCreatingTags = true
     }
@@ -116,17 +104,13 @@ extension QuickCreateViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(TagTextFieldCollectionViewCell.self), for: indexPath) as? TagTextFieldCollectionViewCell else {
-                fatalError()
-            }
+            let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forTagTextFieldAt: indexPath)
 
             cell.delegate = self
 
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(TagCollectionViewCell.self), for: indexPath) as? TagCollectionViewCell else {
-                fatalError()
-            }
+            let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forTagAt: indexPath)
 
             cell.label.text = tags[indexPath.row - 1]
             cell.delegate = self
@@ -169,10 +153,6 @@ extension QuickCreateViewController: TagTextFieldDelegate {
     func didChange(text: String) {
         tagTextFieldText = text
         tagCollectionView.collectionViewLayout.invalidateLayout()
-    }
-
-    func didEndEditing() {
-        invisibleTagCollectionViewButton.isHidden = false
     }
 }
 

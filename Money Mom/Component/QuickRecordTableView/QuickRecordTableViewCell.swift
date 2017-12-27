@@ -31,10 +31,12 @@ class QuickRecordTableViewCell: UITableViewCell {
         }
     }
 
-    let tagCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        return UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+    lazy var tagCollectionView: TagCollectionView = {
+        var tagCollectionView = TagCollectionView.horizontalLayout()
+        tagCollectionView.dataSource = self
+        tagCollectionView.delegate = self
+
+        return tagCollectionView
     }()
 
     var player: AVAudioPlayer? {
@@ -91,11 +93,6 @@ class QuickRecordTableViewCell: UITableViewCell {
         tagCollectionView.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
         tagCollectionView.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
         tagCollectionView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
-        tagCollectionView.dataSource = self
-        tagCollectionView.delegate = self
-        tagCollectionView.backgroundColor = MMColor.white
-        tagCollectionView.register(ReadOnlyTagCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ReadOnlyTagCollectionViewCell.self))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -109,7 +106,7 @@ extension QuickRecordTableViewCell: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(ReadOnlyTagCollectionViewCell.self), for: indexPath) as! ReadOnlyTagCollectionViewCell
+        let cell = (collectionView as! TagCollectionView).dequeueReusableCell(forReadOnlyTagAt: indexPath)
 
         cell.label.text = tags[indexPath.row]
 
