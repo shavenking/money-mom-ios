@@ -2,14 +2,7 @@ import UIKit
 import AVFoundation
 
 class QuickRecordTableViewCell: UITableViewCell {
-    let amountLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.textColor = MMColor.white
-        label.backgroundColor = MMColor.black
-        label.textAlignment = .center
-        return label
-    }()
+    let amountLabel = AmountLabel.large()
 
     let playButton: UIButton = {
         let button = UIButton()
