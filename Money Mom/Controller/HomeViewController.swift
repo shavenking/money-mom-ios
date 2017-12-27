@@ -6,8 +6,6 @@ class HomeViewController: UIViewController {
 
     var quickRecords = [QuickRecord]()
 
-    let documentDirectory: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,9 +46,9 @@ extension HomeViewController: UITableViewDataSource {
         cell.amountLabel.text = "$" + (quickRecords[indexPath.row].amount ?? "")
         cell.tags = quickRecords[indexPath.row].tags ?? []
 
-        if let documentDirectory = documentDirectory, let audioRecording = quickRecords[indexPath.row].audioRecording {
+        if let audioUUID = quickRecords[indexPath.row].audioUUID, let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
             do {
-                cell.player = try AVAudioPlayer(contentsOf: documentDirectory.appendingPathComponent(audioRecording))
+                cell.player = try AVAudioPlayer(contentsOf: audioFilePath)
             } catch {
                 cell.player = nil
             }

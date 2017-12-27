@@ -3,11 +3,11 @@ import UIKit
 class QuickRecord {
     var amount: String?
     var tags: [String]?
-    var audioRecording: String?
+    var audioUUID: UUID?
 
-    init(amount: String, tags: [String], audioRecording: String) {
+    init(amount: String, tags: [String], audioUUID: UUID) {
         self.amount = amount
         self.tags = tags
-        self.audioRecording = audioRecording
+        self.audioUUID = audioUUID
     }
 }

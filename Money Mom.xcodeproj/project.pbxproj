@@ -11,6 +11,7 @@
 		2D2462981FE0FA8600713092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D2462971FE0FA8600713092 /* Assets.xcassets */; };
 		2D24629B1FE0FA8600713092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D2462991FE0FA8600713092 /* LaunchScreen.storyboard */; };
 		69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */; };
+		69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6094CEF6424B731247185 /* MMConfig.swift */; };
 		69D601D6701D4D9A5E75EC62 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60DC3645798317C910CFD /* HomeViewController.swift */; };
 		69D602D71075186817E2C891 /* QuickRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6053181973856242A39C0 /* QuickRecord.swift */; };
 		69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */; };
@@ -32,6 +33,7 @@
 		69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D6053181973856242A39C0 /* QuickRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecord.swift; sourceTree = "<group>"; };
 		69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickCreateViewController.swift; sourceTree = "<group>"; };
+		69D6094CEF6424B731247185 /* MMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMConfig.swift; sourceTree = "<group>"; };
 		69D60AD6C648502F3B79F564 /* MMColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMColor.swift; sourceTree = "<group>"; };
 		69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadOnlyTagCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				69D6023775D4C6315D3DF30A /* Controller */,
 				69D6015EBDBCBEBDB79F8092 /* Component */,
 				69D6088A3B8CF0C0EE233ADD /* Entity */,
+				69D6094CEF6424B731247185 /* MMConfig.swift */,
 			);
 			path = "Money Mom";
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				69D602D71075186817E2C891 /* QuickRecord.swift in Sources */,
 				69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */,
 				69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */,
+				69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

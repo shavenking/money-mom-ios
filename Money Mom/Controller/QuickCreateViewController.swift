@@ -37,28 +37,28 @@ class QuickCreateViewController: UIViewController {
         return button
     }()
 
-    let documentDirectory: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-
-    lazy var audioFileName: String = {
-        return UUID().uuidString
-    }()
+    var audioUUID = UUID()
 
     lazy var audioRecorder: AVAudioRecorder? = {
-        guard let documentDirectory = documentDirectory else {
+        guard let audioFilePath = MMConfig.audioFilePath(of: audioUUID) else {
             return nil
         }
 
-        var audioRecorder =  try! AVAudioRecorder(url: documentDirectory.appendingPathComponent(audioFileName), settings: [
-            AVFormatIDKey: kAudioFormatMPEG4AAC,
-            AVSampleRateKey: 44100,
-            AVNumberOfChannelsKey: 2,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-        ])
+        do {
+            var audioRecorder =  try AVAudioRecorder(url: audioFilePath, settings: [
+                AVFormatIDKey: kAudioFormatMPEG4AAC,
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 2,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ])
 
-        audioRecorder.delegate = self
-        audioRecorder.prepareToRecord()
+            audioRecorder.delegate = self
+            audioRecorder.prepareToRecord()
 
-        return audioRecorder
+            return audioRecorder
+        } catch {
+            return nil
+        }
     }()
 
     var player: AVAudioPlayer?
@@ -125,7 +125,7 @@ extension QuickCreateViewController {
     }
 
     @objc func save() {
-        let quickRecord = QuickRecord(amount: amountTextField.text ?? "", tags: tags, audioRecording: audioFileName)
+        let quickRecord = QuickRecord(amount: amountTextField.text ?? "", tags: tags, audioUUID: audioUUID)
 
         delegate?.didAdd(quickRecord: quickRecord)
 
@@ -238,16 +238,14 @@ extension QuickCreateViewController: AVAudioRecorderDelegate {
             recordButton.setTitleColor(MMColor.white, for: .normal)
             recordButton.setTitle("按住我錄音", for: .normal)
 
-            guard let documentDirectory = documentDirectory else {
-                return
-            }
-
-            do {
-                player = try AVAudioPlayer(contentsOf: documentDirectory.appendingPathComponent(audioFileName))
-                player?.prepareToPlay()
-                player?.play()
-            } catch {
-                fatalError("Cannot play audio")
+            if let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
+                do {
+                    player = try AVAudioPlayer(contentsOf: audioFilePath)
+                    player?.prepareToPlay()
+                    player?.play()
+                } catch {
+                    fatalError("Cannot play audio")
+                }
             }
         }
     }
