@@ -24,6 +24,7 @@
 		69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */; };
 		69D60E34D6BD9AEE4E7CC9C8 /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6046DC285DE4948DE065E /* AmountLabel.swift */; };
 		69D60ECFD60C5EC8BACACB68 /* MMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60AD6C648502F3B79F564 /* MMColor.swift */; };
+		69D60EFD50AC6EFF6FF72E3C /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6010F5335369A619B0101 /* PlayButton.swift */; };
 		69D60F6ABE0138C6DAC95E80 /* TagTextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		2D24629A1FE0FA8600713092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D24629C1FE0FA8600713092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableView.swift; sourceTree = "<group>"; };
+		69D6010F5335369A619B0101 /* PlayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableViewCell.swift; sourceTree = "<group>"; };
 		69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		69D6046DC285DE4948DE065E /* AmountLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				69D60C1D5040A1D4DB8D47A4 /* AmountTextField */,
 				69D60ABA17A5E25A604DF970 /* RecordButton */,
 				69D603BE3F04C0EFBF3A8BF5 /* AmountLabel */,
+				69D60779DFF685CCEE586F03 /* PlayButton */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -132,6 +135,14 @@
 				69D6073F4E1647A8CF0D89A4 /* TagCollectionView.swift */,
 			);
 			path = TagCollectionView;
+			sourceTree = "<group>";
+		};
+		69D60779DFF685CCEE586F03 /* PlayButton */ = {
+			isa = PBXGroup;
+			children = (
+				69D6010F5335369A619B0101 /* PlayButton.swift */,
+			);
+			path = PlayButton;
 			sourceTree = "<group>";
 		};
 		69D6088A3B8CF0C0EE233ADD /* Entity */ = {
@@ -254,6 +265,7 @@
 				69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */,
 				69D60805E4570E4EC3DB005B /* TagCollectionView.swift in Sources */,
 				69D60E34D6BD9AEE4E7CC9C8 /* AmountLabel.swift in Sources */,
+				69D60EFD50AC6EFF6FF72E3C /* PlayButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

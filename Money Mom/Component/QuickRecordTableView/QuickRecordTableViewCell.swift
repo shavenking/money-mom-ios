@@ -4,13 +4,17 @@ import AVFoundation
 class QuickRecordTableViewCell: UITableViewCell {
     let amountLabel = AmountLabel.large()
 
-    let playButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("▶", for: .normal)
-        button.setTitleColor(MMColor.white, for: .normal)
-        button.backgroundColor = MMColor.black
-        return button
-    }()
+    let playButton = PlayButton()
+
+    var player: AVAudioPlayer? {
+        didSet {
+            if player == nil {
+                playButton.setUnavailableToPlayStyle()
+            } else {
+                playButton.setAvailableToPlayStyle()
+            }
+        }
+    }
 
     var tags = [String]() {
         didSet {
@@ -31,18 +35,6 @@ class QuickRecordTableViewCell: UITableViewCell {
 
         return tagCollectionView
     }()
-
-    var player: AVAudioPlayer? {
-        didSet {
-            if player == nil {
-                playButton.setTitle("⤫", for: .normal)
-                playButton.isUserInteractionEnabled = false
-            } else {
-                playButton.setTitle("▶", for: .normal)
-                playButton.isUserInteractionEnabled = true
-            }
-        }
-    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
