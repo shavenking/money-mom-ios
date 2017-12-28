@@ -1,13 +1,8 @@
 import UIKit
 import AVFoundation
-
-protocol QuickRecordDelegate {
-    func didAdd(quickRecord: QuickRecord)
-}
+import CoreData
 
 class QuickCreateViewController: UIViewController {
-    let quickRecord = QuickRecord()
-
     let amountTextField = AmountTextField()
 
     lazy var tagCollectionView: TagCollectionView = {
@@ -24,8 +19,10 @@ class QuickCreateViewController: UIViewController {
         return button
     }()
 
+    let audioUUID = UUID()
+
     lazy var audioRecorder: AVAudioRecorder? = {
-        guard let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) else {
+        guard let audioFilePath = MMConfig.audioFilePath(of: audioUUID) else {
             return nil
         }
 
@@ -46,7 +43,6 @@ class QuickCreateViewController: UIViewController {
     var tags = Set<String>()
     var tagTextFieldText = ""
     var startCreatingTags = false
-    var delegate: QuickRecordDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,10 +85,19 @@ extension QuickCreateViewController {
     }
 
     @objc func save() {
-        quickRecord.amount = amountTextField.text ?? "0"
-        quickRecord.tags = tags
+        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
 
-        delegate?.didAdd(quickRecord: quickRecord)
+        guard let quickRecord = NSEntityDescription.insertNewObject(forEntityName: "QuickRecord", into: viewContext) as? QuickRecord else {
+            fatalError("Insert QuickRecord Failed")
+        }
+
+        quickRecord.id = UUID()
+        quickRecord.audioUUID = audioUUID
+        quickRecord.tags = tags
+        quickRecord.amount = amountTextField.text ?? "0"
+        quickRecord.created_at = Date()
+
+        try! viewContext.save()
 
         navigationController?.popViewController(animated: true)
     }
@@ -192,7 +197,7 @@ extension QuickCreateViewController: RecordButtonDelegate, AVAudioRecorderDelega
         recordButton.setDefaultStyle()
 
         if flag {
-            if let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) {
+            if let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
                     player?.prepareToPlay()
