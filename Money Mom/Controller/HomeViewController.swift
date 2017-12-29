@@ -28,8 +28,8 @@ class HomeViewController: UIViewController {
 
         view.addSubview(quickRecordTableView)
         quickRecordTableView.translatesAutoresizingMaskIntoConstraints = false
-        quickRecordTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-        quickRecordTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+        quickRecordTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        quickRecordTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         quickRecordTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
         quickRecordTableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
         try! fetchedResultsController.performFetch()
