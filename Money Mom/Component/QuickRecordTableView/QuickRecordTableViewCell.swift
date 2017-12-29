@@ -48,6 +48,7 @@ class QuickRecordTableViewCell: UITableViewCell {
             if let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
+                    player?.delegate = self
                 } catch {
                     player = nil
                 }
@@ -132,5 +133,11 @@ extension QuickRecordTableViewCell: UICollectionViewDataSource, UICollectionView
 extension QuickRecordTableViewCell {
     @objc func playAudio() {
         player?.play()
+    }
+}
+
+extension QuickRecordTableViewCell: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        try! AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
     }
 }

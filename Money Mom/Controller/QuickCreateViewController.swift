@@ -200,12 +200,21 @@ extension QuickCreateViewController: RecordButtonDelegate, AVAudioRecorderDelega
             if let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
+                    player?.delegate = self
                     player?.prepareToPlay()
                     player?.play()
                 } catch {
                     fatalError("Cannot play audio")
                 }
             }
+        } else {
+            try! AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
         }
+    }
+}
+
+extension QuickCreateViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        try! AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
     }
 }
