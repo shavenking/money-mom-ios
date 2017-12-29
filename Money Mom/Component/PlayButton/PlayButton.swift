@@ -20,7 +20,7 @@ class PlayButton: UIButton {
     }
 
     func setUnavailableToPlayStyle() {
-        setTitle("⤫", for: .normal)
+        setTitle("-", for: .normal)
         isUserInteractionEnabled = false
     }
 }
