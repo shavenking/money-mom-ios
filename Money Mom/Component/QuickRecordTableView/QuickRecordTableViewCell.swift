@@ -233,8 +233,12 @@ extension QuickRecordTableViewCell {
 
             if (mainViewLeftAnchor?.constant ?? 0) < 0 {
                 hiddenView.backgroundColor = MMColor.red
+                deleteButton.isHidden = false
+                editButton.isHidden = true
             } else {
                 hiddenView.backgroundColor = MMColor.green
+                deleteButton.isHidden = true
+                editButton.isHidden = false
             }
 
             sender.setTranslation(.zero, in: contentView)
