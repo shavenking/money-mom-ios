@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc func showQuickCreateViewController() {
-        navigationController?.pushViewController(QuickCreateViewController(), animated: true)
+    navigationController?.pushViewController(QuickCreateViewController(), animated: true)
     }
 }
 

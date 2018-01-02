@@ -2,6 +2,33 @@ import UIKit
 import AVFoundation
 
 class QuickRecordTableViewCell: UITableViewCell {
+    private lazy var editButton: UIButton = {
+        let editButton = UIButton()
+        editButton.setTitleColor(MMColor.black, for: .normal)
+        editButton.setTitle("EDIT", for: .normal)
+        editButton.sizeToFit()
+        editButton.addTarget(self, action: #selector(userWannaEdit), for: .touchUpInside)
+
+        return editButton
+    }()
+
+    private lazy var deleteButton: UIButton = {
+        let deleteButton = UIButton()
+        deleteButton.setTitleColor(MMColor.white, for: .normal)
+        deleteButton.setTitle("DELETE", for: .normal)
+        deleteButton.sizeToFit()
+        deleteButton.addTarget(self, action: #selector(userWannaDelete), for: .touchUpInside)
+
+        return deleteButton
+    }()
+
+    private lazy var hiddenView: UIView = {
+        let deleteView = UIView()
+        deleteView.layoutMargins = contentView.layoutMargins
+
+        return deleteView
+    }()
+
     let amountLabel = AmountLabel.large()
 
     let playButton = PlayButton()
@@ -56,24 +83,71 @@ class QuickRecordTableViewCell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+    private let topInnerView: UIView = {
         let topInnerView = UIView()
         topInnerView.layer.cornerRadius = 4
         topInnerView.layer.masksToBounds = true
         topInnerView.layoutMargins = .zero
+        return topInnerView
+    }()
+
+    private lazy var mainView: UIView = {
+        let mainView = UIView()
+        mainView.backgroundColor = MMColor.white
+        mainView.layoutMargins = contentView.layoutMargins
+        return mainView
+    }()
+
+    private var mainViewLeftAnchor: NSLayoutConstraint?
+
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
+        panGestureRecognizer.delegate = self
+        return panGestureRecognizer
+    }()
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         topInnerView.addSubview(amountLabel)
         topInnerView.addSubview(playButton)
 
-        contentView.addSubview(topInnerView)
-        contentView.addSubview(tagCollectionView)
+        mainView.addSubview(topInnerView)
+        mainView.addSubview(tagCollectionView)
+
+        hiddenView.addSubview(editButton)
+        hiddenView.addSubview(deleteButton)
+
+        contentView.addSubview(hiddenView)
+        contentView.addSubview(mainView)
+
+        hiddenView.translatesAutoresizingMaskIntoConstraints = false
+        hiddenView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
+        hiddenView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        hiddenView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor).isActive = true
+        hiddenView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.topAnchor.constraint(equalTo: hiddenView.layoutMarginsGuide.topAnchor).isActive = true
+        editButton.bottomAnchor.constraint(equalTo: hiddenView.layoutMarginsGuide.bottomAnchor).isActive = true
+        editButton.leftAnchor.constraint(equalTo: hiddenView.layoutMarginsGuide.leftAnchor).isActive = true
+
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.topAnchor.constraint(equalTo: hiddenView.layoutMarginsGuide.topAnchor).isActive = true
+        deleteButton.bottomAnchor.constraint(equalTo: hiddenView.layoutMarginsGuide.bottomAnchor).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: hiddenView.layoutMarginsGuide.rightAnchor).isActive = true
+
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        mainView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        mainView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        mainViewLeftAnchor = mainView.leftAnchor.constraint(equalTo: contentView.leftAnchor)
+        mainViewLeftAnchor?.isActive = true
 
         topInnerView.translatesAutoresizingMaskIntoConstraints = false
-        topInnerView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
-        topInnerView.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
-        topInnerView.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
+        topInnerView.topAnchor.constraint(equalTo: mainView.layoutMarginsGuide.topAnchor).isActive = true
+        topInnerView.leftAnchor.constraint(equalTo: mainView.layoutMarginsGuide.leftAnchor).isActive = true
+        topInnerView.rightAnchor.constraint(equalTo: mainView.layoutMarginsGuide.rightAnchor).isActive = true
         topInnerView.heightAnchor.constraint(equalToConstant: 80).isActive = true
 
         playButton.translatesAutoresizingMaskIntoConstraints = false
@@ -95,13 +169,21 @@ class QuickRecordTableViewCell: UITableViewCell {
 
         tagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         tagCollectionView.topAnchor.constraint(equalTo: topInnerView.bottomAnchor).isActive = true
-        tagCollectionView.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
-        tagCollectionView.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
-        tagCollectionView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        tagCollectionView.leftAnchor.constraint(equalTo: mainView.layoutMarginsGuide.leftAnchor).isActive = true
+        tagCollectionView.rightAnchor.constraint(equalTo: mainView.layoutMarginsGuide.rightAnchor).isActive = true
+        tagCollectionView.bottomAnchor.constraint(equalTo: mainView.layoutMarginsGuide.bottomAnchor).isActive = true
+
+        addGestureRecognizer(panGestureRecognizer)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        mainViewLeftAnchor?.constant = 0
     }
 }
 
@@ -139,5 +221,74 @@ extension QuickRecordTableViewCell {
 extension QuickRecordTableViewCell: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         try! AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+    }
+}
+
+extension QuickRecordTableViewCell {
+    @objc private func panGesture(sender: UIPanGestureRecognizer) {
+        if sender.state == .began || sender.state == .changed {
+            let translation = sender.translation(in: contentView)
+
+            mainViewLeftAnchor?.constant += translation.x
+
+            if (mainViewLeftAnchor?.constant ?? 0) < 0 {
+                hiddenView.backgroundColor = MMColor.red
+            } else {
+                hiddenView.backgroundColor = MMColor.green
+            }
+
+            sender.setTranslation(.zero, in: contentView)
+        }
+
+        if sender.state == .ended, let mainViewLeftAnchor = mainViewLeftAnchor {
+            contentView.layoutIfNeeded()
+
+            if mainViewLeftAnchor.constant < 0, abs(mainViewLeftAnchor.constant) >= deleteButton.frame.width {
+                mainViewLeftAnchor.constant = -deleteButton.frame.width - contentView.layoutMargins.right
+            } else if mainViewLeftAnchor.constant > 0, abs(mainViewLeftAnchor.constant) >= editButton.frame.width {
+                mainViewLeftAnchor.constant = editButton.frame.width + contentView.layoutMargins.left
+            } else {
+                mainViewLeftAnchor.constant = 0
+            }
+
+            UIView.animate(withDuration: 0.2) { () in
+                self.contentView.layoutIfNeeded()
+            }
+        }
+    }
+}
+
+extension QuickRecordTableViewCell {
+    @objc private func userWannaDelete() {
+        guard let quickRecord = quickRecord else {
+            return
+        }
+
+        contentView.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.mainViewLeftAnchor?.constant = -self.contentView.frame.width
+            self.contentView.layoutIfNeeded()
+         }) { finished in
+            if finished {
+                let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+                viewContext.delete(quickRecord)
+                try! viewContext.save()
+            }
+        }
+    }
+
+    @objc private func userWannaEdit() {
+        dump("edit")
+    }
+}
+
+extension QuickRecordTableViewCell {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGestureRecognizer, let velocity = (gestureRecognizer as? UIPanGestureRecognizer)?.velocity(in: contentView) {
+            return abs(velocity.x) > abs(velocity.y)
+        }
+
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }
