@@ -273,7 +273,7 @@ extension QuickRecordTableViewCell {
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.mainViewLeftAnchor?.constant = -self.contentView.frame.width
             self.contentView.layoutIfNeeded()
-         }) { finished in
+        }) { finished in
             if finished {
                 let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
                 viewContext.delete(quickRecord)
