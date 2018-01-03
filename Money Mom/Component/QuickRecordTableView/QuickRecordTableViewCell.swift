@@ -1,7 +1,13 @@
 import UIKit
 import AVFoundation
 
+protocol QuickRecordTableViewCellDelegate {
+    func userWannaEdit(quickRecord: QuickRecord)
+}
+
 class QuickRecordTableViewCell: UITableViewCell {
+    var delegate: QuickRecordTableViewCellDelegate?
+
     private lazy var editButton: UIButton = {
         let editButton = UIButton()
         editButton.setTitleColor(MMColor.black, for: .normal)
@@ -283,7 +289,19 @@ extension QuickRecordTableViewCell {
     }
 
     @objc private func userWannaEdit() {
-        dump("edit")
+        contentView.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.mainViewLeftAnchor?.constant = self.contentView.frame.width
+            self.contentView.layoutIfNeeded()
+        }) { finished in
+            if finished {
+                if let quickRecord = self.quickRecord {
+                    self.delegate?.userWannaEdit(quickRecord: quickRecord)
+                    self.mainViewLeftAnchor?.constant = 0
+                }
+            }
+        }
     }
 }
 

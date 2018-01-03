@@ -53,6 +53,7 @@ extension HomeViewController: UITableViewDataSource {
         let cell = (tableView as! QuickRecordTableView).dequeueReusableCell(for: indexPath)
 
         cell.quickRecord = fetchedResultsController.object(at: indexPath)
+        cell.delegate = self
 
         return cell
     }
@@ -61,5 +62,11 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         quickRecordTableView.reloadData()
+    }
+}
+
+extension HomeViewController: QuickRecordTableViewCellDelegate {
+    func userWannaEdit(quickRecord: QuickRecord) {
+        navigationController?.pushViewController(CreateRecordViewController(quickRecord: quickRecord), animated: false)
     }
 }
