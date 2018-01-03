@@ -54,7 +54,7 @@ class QuickCreateViewController: UIViewController {
         addSubviews()
     }
 
-    private func addSubviews() {
+    internal func addSubviews() {
         view.addSubview(amountTextField)
         amountTextField.translatesAutoresizingMaskIntoConstraints = false
         amountTextField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
