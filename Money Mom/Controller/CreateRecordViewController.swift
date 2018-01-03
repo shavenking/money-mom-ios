@@ -33,6 +33,20 @@ class CreateRecordViewController: QuickCreateViewController {
         return dateTextField
     }()
 
+    lazy var locationTextField: UITextField = {
+        let locationTextField = UITextField()
+        locationTextField.textColor = MMColor.black
+        locationTextField.leftViewMode = .always
+        locationTextField.leftView = {
+            let leftViewLabel = UILabel()
+            leftViewLabel.text = "地點："
+            leftViewLabel.sizeToFit()
+            leftViewLabel.textColor = MMColor.black
+            return leftViewLabel
+        }()
+        return locationTextField
+    }()
+
     convenience init(quickRecord: QuickRecord) {
         self.init()
 
@@ -52,12 +66,19 @@ class CreateRecordViewController: QuickCreateViewController {
         super.addSubviews()
 
         view.addSubview(dateTextField)
+        view.addSubview(locationTextField)
 
         dateTextField.translatesAutoresizingMaskIntoConstraints = false
         dateTextField.topAnchor.constraint(equalTo: recordButton.layoutMarginsGuide.bottomAnchor, constant: 10).isActive = true
         dateTextField.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
         dateTextField.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
         dateTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        locationTextField.translatesAutoresizingMaskIntoConstraints = false
+        locationTextField.topAnchor.constraint(equalTo: dateTextField.layoutMarginsGuide.bottomAnchor, constant: 10).isActive = true
+        locationTextField.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        locationTextField.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
+        locationTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
     override func save() {
