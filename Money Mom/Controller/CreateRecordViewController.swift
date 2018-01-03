@@ -47,6 +47,24 @@ class CreateRecordViewController: QuickCreateViewController {
         return locationTextField
     }()
 
+    let transactionTypeLabel: UILabel = {
+        let transactionTypeLabel = UILabel()
+        transactionTypeLabel.text = "分類："
+        transactionTypeLabel.textColor = MMColor.black
+        transactionTypeLabel.sizeToFit()
+        return transactionTypeLabel
+    }()
+
+    lazy var transactionTypeSegmentedControl: UISegmentedControl = {
+        let transactionTypeSegmentedControl = UISegmentedControl()
+        transactionTypeSegmentedControl.tintColor = MMColor.black
+        transactionTypeSegmentedControl.insertSegment(withTitle: "收入", at: 0, animated: false)
+        transactionTypeSegmentedControl.insertSegment(withTitle: "支出", at: 1, animated: false)
+        transactionTypeSegmentedControl.addTarget(self, action: #selector(transactionTypeChanged), for: .valueChanged)
+
+        return transactionTypeSegmentedControl
+    }()
+
     convenience init(quickRecord: QuickRecord) {
         self.init()
 
@@ -67,6 +85,8 @@ class CreateRecordViewController: QuickCreateViewController {
 
         view.addSubview(dateTextField)
         view.addSubview(locationTextField)
+        view.addSubview(transactionTypeSegmentedControl)
+        view.addSubview(transactionTypeLabel)
 
         dateTextField.translatesAutoresizingMaskIntoConstraints = false
         dateTextField.topAnchor.constraint(equalTo: recordButton.layoutMarginsGuide.bottomAnchor, constant: 10).isActive = true
@@ -79,6 +99,17 @@ class CreateRecordViewController: QuickCreateViewController {
         locationTextField.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
         locationTextField.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
         locationTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        transactionTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+        transactionTypeLabel.topAnchor.constraint(equalTo: locationTextField.layoutMarginsGuide.bottomAnchor, constant: 10).isActive = true
+        transactionTypeLabel.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        transactionTypeLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        transactionTypeSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        transactionTypeSegmentedControl.topAnchor.constraint(equalTo: locationTextField.layoutMarginsGuide.bottomAnchor, constant: 10).isActive = true
+        transactionTypeSegmentedControl.leftAnchor.constraint(equalTo: transactionTypeLabel.rightAnchor).isActive = true
+        transactionTypeSegmentedControl.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
+        transactionTypeSegmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
     override func save() {
@@ -97,5 +128,27 @@ extension CreateRecordViewController {
         formatter.timeStyle = .short
         formatter.timeZone = TimeZone.current
         dateTextField.text = formatter.string(from: date)
+    }
+}
+
+extension CreateRecordViewController {
+    @objc func transactionTypeChanged() {
+        if transactionTypeSegmentedControl.selectedSegmentIndex == 0 {
+            transactionTypeSegmentedControl.tintColor = MMColor.green
+            transactionTypeSegmentedControl.setTitleTextAttributes([
+                NSAttributedStringKey.foregroundColor: MMColor.black
+            ], for: .normal)
+            transactionTypeSegmentedControl.setTitleTextAttributes([
+                NSAttributedStringKey.foregroundColor: MMColor.black
+            ], for: .selected)
+        } else {
+            transactionTypeSegmentedControl.tintColor = MMColor.red
+            transactionTypeSegmentedControl.setTitleTextAttributes([
+                NSAttributedStringKey.foregroundColor: MMColor.black
+            ], for: .normal)
+            transactionTypeSegmentedControl.setTitleTextAttributes([
+                NSAttributedStringKey.foregroundColor: MMColor.white
+            ], for: .selected)
+        }
     }
 }
