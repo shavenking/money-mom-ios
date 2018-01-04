@@ -75,7 +75,7 @@ class QuickRecordTableViewCell: UITableViewCell {
                 return
             }
 
-            amountLabel.text = "$\(quickRecord.amount)"
+            amountLabel.text = "$\(quickRecord.amount == NSDecimalNumber.notANumber ? NSDecimalNumber.zero : quickRecord.amount)"
             tags = quickRecord.tags
 
             if let audioFilePath = MMConfig.audioFilePath(of: quickRecord.audioUUID) {

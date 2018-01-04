@@ -10,8 +10,8 @@ class HomeViewController: UIViewController {
     }()
 
     lazy var fetchedResultsController: NSFetchedResultsController<QuickRecord> = {
-        let request = NSFetchRequest<QuickRecord>(entityName: "QuickRecord")
-        request.sortDescriptors = [NSSortDescriptor(key: "created_at", ascending: false)]
+        let request = NSFetchRequest<QuickRecord>(entityName: String(describing: QuickRecord.self))
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(QuickRecord.createdAt), ascending: false)]
         let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
         let fetchedResultsController = NSFetchedResultsController<QuickRecord>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self

@@ -73,10 +73,10 @@ class CreateRecordViewController: QuickCreateViewController {
     }
 
     private func updateUI(with quickRecord: QuickRecord) {
-        amountTextField.text = quickRecord.amount
+        amountTextField.text = quickRecord.amount.stringValue
         tags = quickRecord.tags
-        datePicker.setDate(quickRecord.created_at, animated: false)
-        setDateTextFieldText(with: quickRecord.created_at)
+        datePicker.setDate(quickRecord.createdAt, animated: false)
+        setDateTextFieldText(with: quickRecord.createdAt)
         tagCollectionView.reloadData()
     }
 

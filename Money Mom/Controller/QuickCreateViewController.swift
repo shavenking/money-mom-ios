@@ -94,8 +94,8 @@ extension QuickCreateViewController {
         quickRecord.id = UUID()
         quickRecord.audioUUID = audioUUID
         quickRecord.tags = tags
-        quickRecord.amount = amountTextField.text ?? "0"
-        quickRecord.created_at = Date()
+        quickRecord.amount = NSDecimalNumber(string: amountTextField.text) ?? NSDecimalNumber.zero
+        quickRecord.createdAt = Date()
 
         try! viewContext.save()
 
