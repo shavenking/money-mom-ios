@@ -2,7 +2,7 @@ import UIKit
 import AVFoundation
 import CoreData
 
-class CreateRecordViewController: QuickCreateViewController {
+class CreateTransactionViewController: QuickCreateViewController {
     var quickRecord: QuickRecord? {
         didSet {
             if let quickRecord = quickRecord {
@@ -113,11 +113,41 @@ class CreateRecordViewController: QuickCreateViewController {
     }
 
     override func save() {
-        dump("save")
+        guard let quickRecord = quickRecord else {
+            return
+        }
+
+        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+
+        guard let transaction = NSEntityDescription.insertNewObject(forEntityName: String(describing: Transaction.self), into: viewContext) as? Transaction else {
+            fatalError("Insert Transaction Failed")
+        }
+
+        quickRecord.isProcessed = true
+        quickRecord.transaction = transaction
+
+        transaction.amount = quickRecord.amount
+        transaction.audioUUID = audioUUID
+        transaction.createdAt = datePicker.date
+        transaction.id = UUID()
+        transaction.location = locationTextField.text ?? ""
+        transaction.tags = quickRecord.tags
+
+        if transactionTypeSegmentedControl.selectedSegmentIndex == 0 {
+            transaction.type = TransactionType.INCOME
+        } else {
+            transaction.type = TransactionType.EXPENSE
+        }
+        transaction.quickRecord = quickRecord
+
+        try! viewContext.save()
+
+        // todo: use UITabBar
+        navigationController?.pushViewController(TransactionHomeViewController(), animated: true)
     }
 }
 
-extension CreateRecordViewController {
+extension CreateTransactionViewController {
     @objc func datePickerValueChanged() {
         setDateTextFieldText(with: datePicker.date)
     }
@@ -131,7 +161,7 @@ extension CreateRecordViewController {
     }
 }
 
-extension CreateRecordViewController {
+extension CreateTransactionViewController {
     @objc func transactionTypeChanged() {
         if transactionTypeSegmentedControl.selectedSegmentIndex == 0 {
             transactionTypeSegmentedControl.tintColor = MMColor.green

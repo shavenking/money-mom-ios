@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
 
     lazy var fetchedResultsController: NSFetchedResultsController<QuickRecord> = {
         let request = NSFetchRequest<QuickRecord>(entityName: String(describing: QuickRecord.self))
+        request.predicate = NSPredicate(format: "\(#keyPath(QuickRecord.isProcessed)) = %@", argumentArray: [false])
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(QuickRecord.createdAt), ascending: false)]
         let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
         let fetchedResultsController = NSFetchedResultsController<QuickRecord>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -67,6 +68,6 @@ extension HomeViewController: NSFetchedResultsControllerDelegate {
 
 extension HomeViewController: QuickRecordTableViewCellDelegate {
     func userWannaEdit(quickRecord: QuickRecord) {
-        navigationController?.pushViewController(CreateRecordViewController(quickRecord: quickRecord), animated: false)
+        navigationController?.pushViewController(CreateTransactionViewController(quickRecord: quickRecord), animated: false)
     }
 }
