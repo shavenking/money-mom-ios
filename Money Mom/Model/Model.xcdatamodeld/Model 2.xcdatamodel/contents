@@ -17,7 +17,7 @@
         <attribute name="location" attributeType="String" syncable="YES"/>
         <attribute name="tags" attributeType="Transformable" syncable="YES"/>
         <attribute name="type" attributeType="Transformable" syncable="YES"/>
-        <relationship name="quickRecord" maxCount="1" deletionRule="Nullify" destinationEntity="QuickRecord" inverseName="transaction" inverseEntity="QuickRecord" syncable="YES"/>
+        <relationship name="quickRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuickRecord" inverseName="transaction" inverseEntity="QuickRecord" syncable="YES"/>
     </entity>
     <elements>
         <element name="QuickRecord" positionX="-63" positionY="-18" width="128" height="148"/>

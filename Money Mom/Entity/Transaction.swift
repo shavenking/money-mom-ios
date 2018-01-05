@@ -27,5 +27,5 @@ class Transaction: QuickRecordBase {
 
     @NSManaged var location: String
     @NSManaged var type: TransactionType
-    @NSManaged var quickRecord: QuickRecord
+    @NSManaged var quickRecord: QuickRecord?
 }
