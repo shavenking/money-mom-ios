@@ -142,8 +142,7 @@ class CreateTransactionViewController: QuickCreateViewController {
 
         try! viewContext.save()
 
-        // todo: use UITabBar
-        navigationController?.pushViewController(TransactionHomeViewController(), animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 
@@ -180,5 +179,11 @@ extension CreateTransactionViewController {
                 NSAttributedStringKey.foregroundColor: MMColor.white
             ], for: .selected)
         }
+    }
+}
+
+extension CreateTransactionViewController: UnderstandHowToCreateTransaction {
+    func userWannaCreateTransactionFrom(quickRecord: QuickRecord) {
+        self.quickRecord = quickRecord
     }
 }

@@ -2,7 +2,20 @@ import UIKit
 import AVFoundation
 import CoreData
 
+protocol UnderstandHowToCreateTransaction {
+    func userWannaCreateTransactionFrom(quickRecord: QuickRecord)
+}
+
 class TransactionHomeViewController: UIViewController {
+    override var title: String? {
+        get {
+            return super.title ?? "收支記錄"
+        }
+        set {
+            super.title = newValue
+        }
+    }
+
     lazy var transactionTableView: TransactionTableView = {
         var tableView = TransactionTableView()
         tableView.dataSource = self
@@ -67,7 +80,12 @@ extension TransactionHomeViewController: NSFetchedResultsControllerDelegate {
 
 extension TransactionHomeViewController: TransactionTableViewCellDelegate {
     func userWannaEdit(transaction: Transaction) {
-        dump("user wanna edit")
-//        navigationController?.pushViewController(CreateRecordViewController(quickRecord: quickRecord), animated: false)
+        dump("bla bla bla...")
+    }
+}
+
+extension TransactionHomeViewController: UnderstandHowToCreateTransaction {
+    func userWannaCreateTransactionFrom(quickRecord: QuickRecord) {
+        navigationController?.pushViewController(CreateTransactionViewController(quickRecord: quickRecord), animated: true)
     }
 }

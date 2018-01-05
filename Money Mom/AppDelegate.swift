@@ -12,7 +12,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.tintColor = MMColor.black
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
+        let rootViewController = UITabBarController()
+        rootViewController.viewControllers = [
+            UINavigationController(rootViewController: HomeViewController()),
+            UINavigationController(rootViewController: TransactionHomeViewController())
+        ]
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
 
         let container = NSPersistentContainer(name: "Model")

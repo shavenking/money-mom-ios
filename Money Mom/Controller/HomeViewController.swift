@@ -3,6 +3,15 @@ import AVFoundation
 import CoreData
 
 class HomeViewController: UIViewController {
+    override var title: String? {
+        get {
+            return super.title ?? "快速記帳"
+        }
+        set {
+            super.title = newValue
+        }
+    }
+
     lazy var quickRecordTableView: QuickRecordTableView = {
         var tableView = QuickRecordTableView()
         tableView.dataSource = self
@@ -68,6 +77,11 @@ extension HomeViewController: NSFetchedResultsControllerDelegate {
 
 extension HomeViewController: QuickRecordTableViewCellDelegate {
     func userWannaEdit(quickRecord: QuickRecord) {
-        navigationController?.pushViewController(CreateTransactionViewController(quickRecord: quickRecord), animated: false)
+        if let viewController = tabBarController?.viewControllers?.first(where: { controller in
+            return (controller as? UINavigationController)?.topViewController is UnderstandHowToCreateTransaction
+        }) {
+            tabBarController?.selectedViewController = viewController
+            ((viewController as! UINavigationController).topViewController as! UnderstandHowToCreateTransaction).userWannaCreateTransactionFrom(quickRecord: quickRecord)
+        }
     }
 }
