@@ -34,4 +34,15 @@ class Transaction: QuickRecordBase {
     @NSManaged var location: String
     @NSManaged var type: TransactionType
     @NSManaged var quickRecord: QuickRecord?
+
+    @objc var createdAtDay: String {
+        get {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .none
+            formatter.timeZone = TimeZone.current
+            return formatter.string(from: createdAt)
+        }
+    }
+
 }

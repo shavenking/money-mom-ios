@@ -9,10 +9,15 @@ class TransactionTableView: UITableView {
         separatorStyle = .none
         allowsSelection = false
         register(TransactionTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TransactionTableViewCell.self))
+        register(TransactionTableHeaderView.self, forHeaderFooterViewReuseIdentifier: NSStringFromClass(TransactionTableHeaderView.self))
     }
 
     func dequeueReusableCell(for indexPath: IndexPath) -> TransactionTableViewCell {
         return super.dequeueReusableCell(withIdentifier: NSStringFromClass(TransactionTableViewCell.self), for: indexPath) as! TransactionTableViewCell
+    }
+
+    func dequeueReusableHeaderView() -> TransactionTableHeaderView {
+        return super.dequeueReusableHeaderFooterView(withIdentifier: NSStringFromClass(TransactionTableHeaderView.self)) as! TransactionTableHeaderView
     }
 
     required init?(coder aDecoder: NSCoder) {

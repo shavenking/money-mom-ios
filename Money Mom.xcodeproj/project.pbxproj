@@ -29,6 +29,7 @@
 		69D6092AAC5FD0E1A0E03778 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60DF64DBC78BCCF50E995 /* TransactionTableViewCell.swift */; };
 		69D609814834B9A86D8C7D47 /* QuickRecordTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */; };
 		69D60BDBC4A87DCDE73F03D4 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60A2A313A58787DF9F847 /* AmountTextField.swift */; };
+		69D60DC094534849B6EAD913 /* TransactionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D605974039AB75BF798D49 /* TransactionTableHeaderView.swift */; };
 		69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */; };
 		69D60E34D6BD9AEE4E7CC9C8 /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6046DC285DE4948DE065E /* AmountLabel.swift */; };
 		69D60ECFD60C5EC8BACACB68 /* MMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60AD6C648502F3B79F564 /* MMColor.swift */; };
@@ -55,6 +56,7 @@
 		69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		69D6046DC285DE4948DE065E /* AmountLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
 		69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
+		69D605974039AB75BF798D49 /* TransactionTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableHeaderView.swift; sourceTree = "<group>"; };
 		69D605A01BD1F398A1F8EF91 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		69D6067D5D09727721490778 /* StringAmountToDecimalAmountPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringAmountToDecimalAmountPolicy.swift; sourceTree = "<group>"; };
 		69D606D54A33650154C87C92 /* TransactionHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHomeViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */,
 				69D60DF64DBC78BCCF50E995 /* TransactionTableViewCell.swift */,
+				69D605974039AB75BF798D49 /* TransactionTableHeaderView.swift */,
 			);
 			path = TransactionTableView;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				69D600B145CF493697AC1A41 /* TransactionHomeViewController.swift in Sources */,
 				69D6089328B164CCDC0AB881 /* TransactionTableView.swift in Sources */,
 				69D6092AAC5FD0E1A0E03778 /* TransactionTableViewCell.swift in Sources */,
+				69D60DC094534849B6EAD913 /* TransactionTableHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,7 @@ class TransactionHomeViewController: UIViewController {
     lazy var transactionTableView: TransactionTableView = {
         var tableView = TransactionTableView()
         tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
 
@@ -26,7 +27,7 @@ class TransactionHomeViewController: UIViewController {
         let request = NSFetchRequest<Transaction>(entityName: String(describing: Transaction.self))
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)]
         let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
-        let fetchedResultsController = NSFetchedResultsController<Transaction>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController<Transaction>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: #keyPath(Transaction.createdAtDay), cacheName: nil)
         fetchedResultsController.delegate = self
 
         return fetchedResultsController
@@ -53,13 +54,63 @@ class TransactionHomeViewController: UIViewController {
 //    }
 }
 
-extension TransactionHomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let transactions = fetchedResultsController.fetchedObjects else {
+extension TransactionHomeViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = fetchedResultsController.sections else {
             return 0
         }
 
-        return transactions.count
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+            return 0
+        }
+
+        return sectionInfo.numberOfObjects
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+            return nil
+        }
+
+        let headerView = (tableView as! TransactionTableView).dequeueReusableHeaderView()
+
+        var totalIncome = NSDecimalNumber.zero
+        var totalExpense = NSDecimalNumber.zero
+
+        sectionInfo.objects?.forEach { transaction in
+            guard let transaction = transaction as? Transaction else {
+                return
+            }
+
+            guard transaction.amount != NSDecimalNumber.notANumber else {
+                return
+            }
+
+            if transaction.type == .INCOME {
+                totalIncome = totalIncome.adding(transaction.amount)
+            } else {
+                totalExpense = totalExpense.adding(transaction.amount)
+            }
+        }
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.timeZone = TimeZone.current
+
+        headerView.date = formatter.date(from: sectionInfo.name) ?? Date()
+        headerView.totalIncome = totalIncome
+        headerView.totalExpense = totalExpense
+
+        return headerView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
