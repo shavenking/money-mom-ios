@@ -78,6 +78,18 @@ class TransactionTableViewCell: UITableViewCell {
             amountLabel.text = "$\(transaction.amount == NSDecimalNumber.notANumber ? NSDecimalNumber.zero : transaction.amount)"
             tags = transaction.tags
 
+            if transaction.type == .INCOME {
+                amountLabel.textColor = MMColor.black
+                amountLabel.backgroundColor = MMColor.green
+                playButton.setTitleColor(MMColor.black, for: .normal)
+                playButton.backgroundColor = MMColor.green
+            } else {
+                amountLabel.textColor = MMColor.white
+                amountLabel.backgroundColor = MMColor.red
+                playButton.setTitleColor(MMColor.white, for: .normal)
+                playButton.backgroundColor = MMColor.red
+            }
+
             if let audioFilePath = MMConfig.audioFilePath(of: transaction.audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)

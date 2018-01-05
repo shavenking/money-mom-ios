@@ -20,6 +20,12 @@ import CoreData
     }
 }
 
+extension TransactionType {
+    static func ==(lhs: TransactionType, rhs: TransactionType) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+}
+
 class Transaction: QuickRecordBase {
     func fetchRequest() -> NSFetchRequest<Transaction> {
         return NSFetchRequest<Transaction>(entityName: "Transaction")
