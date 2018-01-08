@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootViewController = UITabBarController()
         rootViewController.viewControllers = [
             UINavigationController(rootViewController: HomeViewController()),
-            UINavigationController(rootViewController: TransactionHomeViewController())
+            UINavigationController(rootViewController: TransactionHomeViewController()),
+            UINavigationController(rootViewController: StatsViewController())
         ]
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

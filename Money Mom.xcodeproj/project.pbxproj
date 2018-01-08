@@ -16,6 +16,7 @@
 		69D600B145CF493697AC1A41 /* TransactionHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D606D54A33650154C87C92 /* TransactionHomeViewController.swift */; };
 		69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */; };
 		69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6094CEF6424B731247185 /* MMConfig.swift */; };
+		69D6019858BA70638C91CFB5 /* MoneyMomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6010B52F883B94A51B215 /* MoneyMomView.swift */; };
 		69D601D6701D4D9A5E75EC62 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60DC3645798317C910CFD /* HomeViewController.swift */; };
 		69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6084BCF294D8C618FDBAA /* RecordButton.swift */; };
 		69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */; };
@@ -23,6 +24,7 @@
 		69D603B0EEDE6E7D789210CD /* QuickCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */; };
 		69D604CD046BC2ADA6BC2713 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D601B7591FB79ABE14EDF2 /* CreateTransactionViewController.swift */; };
 		69D604F5E0044D5A929762ED /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */; };
+		69D605C94A997CC229F79307 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D602E8284A66ACAD6E6D6C /* StatsViewController.swift */; };
 		69D60805E4570E4EC3DB005B /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6073F4E1647A8CF0D89A4 /* TagCollectionView.swift */; };
 		69D6081F5799C42D5B0CC915 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D605A01BD1F398A1F8EF91 /* Transaction.swift */; };
 		69D6089328B164CCDC0AB881 /* TransactionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */; };
@@ -49,10 +51,12 @@
 		2D62639E1FF48E4400CE421E /* QuickRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickRecord.swift; sourceTree = "<group>"; };
 		2D6DFD4B1FF4830300E362E1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableView.swift; sourceTree = "<group>"; };
+		69D6010B52F883B94A51B215 /* MoneyMomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyMomView.swift; sourceTree = "<group>"; };
 		69D6010F5335369A619B0101 /* PlayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableViewCell.swift; sourceTree = "<group>"; };
 		69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableView.swift; sourceTree = "<group>"; };
 		69D601B7591FB79ABE14EDF2 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
+		69D602E8284A66ACAD6E6D6C /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		69D6046DC285DE4948DE065E /* AmountLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
 		69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 				69D603BE3F04C0EFBF3A8BF5 /* AmountLabel */,
 				69D60779DFF685CCEE586F03 /* PlayButton */,
 				69D600FDE3D893E873D0BA6E /* TransactionTableView */,
+				69D609F7537E1CAC8190B47A /* ForFun */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */,
 				69D601B7591FB79ABE14EDF2 /* CreateTransactionViewController.swift */,
 				69D606D54A33650154C87C92 /* TransactionHomeViewController.swift */,
+				69D602E8284A66ACAD6E6D6C /* StatsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,6 +212,14 @@
 				69D605A01BD1F398A1F8EF91 /* Transaction.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		69D609F7537E1CAC8190B47A /* ForFun */ = {
+			isa = PBXGroup;
+			children = (
+				69D6010B52F883B94A51B215 /* MoneyMomView.swift */,
+			);
+			path = ForFun;
 			sourceTree = "<group>";
 		};
 		69D60A109F1D80D43B1D4C7A /* QuickRecordTableView */ = {
@@ -331,6 +345,8 @@
 				69D6089328B164CCDC0AB881 /* TransactionTableView.swift in Sources */,
 				69D6092AAC5FD0E1A0E03778 /* TransactionTableViewCell.swift in Sources */,
 				69D60DC094534849B6EAD913 /* TransactionTableHeaderView.swift in Sources */,
+				69D605C94A997CC229F79307 /* StatsViewController.swift in Sources */,
+				69D6019858BA70638C91CFB5 /* MoneyMomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
