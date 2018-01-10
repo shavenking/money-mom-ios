@@ -1,34 +1,11 @@
 import UIKit
 
-fileprivate class TransactionStats {
-    var amount: NSDecimalNumber
-    var date: Date
-    var type: TransactionType
-
-    init(amount: NSDecimalNumber, date: Date, type: TransactionType) {
-        self.amount = amount
-        self.date = date
-        self.type = type
-    }
-}
-
 fileprivate let formatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-mm-dd"
     formatter.timeZone = .current
     return formatter
 }()
-
-fileprivate var transactions = [TransactionStats]([
-    TransactionStats(amount: 100, date: formatter.date(from: "2017-01-01")!, type: .EXPENSE),
-    TransactionStats(amount: 200, date: formatter.date(from: "2017-01-02")!, type: .EXPENSE),
-    TransactionStats(amount: 800, date: formatter.date(from: "2017-01-03")!, type: .EXPENSE),
-    TransactionStats(amount: 300, date: formatter.date(from: "2017-01-04")!, type: .EXPENSE),
-    TransactionStats(amount: 0, date: formatter.date(from: "2017-01-05")!, type: .EXPENSE),
-    TransactionStats(amount: 1000, date: formatter.date(from: "2017-01-10")!, type: .EXPENSE),
-    TransactionStats(amount: 2000, date: formatter.date(from: "2017-01-10")!, type: .INCOME)
-])
-
 
 fileprivate extension Calendar {
     func dates(from: Date, to: Date) -> [Date] {
@@ -56,11 +33,12 @@ fileprivate extension Calendar {
 }
 
 class TransactionLineChart: UIView {
-//    var transactions: [Transaction]? {
-//        didSet {
-//            setNeedsDisplay()
-//        }
-//    }
+    var transactionStatsSet: [TransactionStats]? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -163,7 +141,7 @@ class TransactionLineChart: UIView {
     }
 
     private func transactionsWithoutNAN() -> [TransactionStats]? {
-        return transactions.filter {
+        return transactionStatsSet?.filter {
             $0.amount != .notANumber
         }
     }
@@ -181,19 +159,19 @@ class TransactionLineChart: UIView {
     }
 
     private func maxAmount() -> NSDecimalNumber? {
-        return transactions.max {
+        return transactionStatsSet?.max {
             $0.amount.compare($1.amount) == .orderedAscending
         }?.amount
     }
 
     private func maxDate() -> Date? {
-        return transactions.max {
+        return transactionStatsSet?.max {
             $0.date <= $1.date
         }?.date
     }
 
     private func minDate() -> Date? {
-        return transactions.min {
+        return transactionStatsSet?.min {
             $0.date <= $1.date
         }?.date
     }

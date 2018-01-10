@@ -13,11 +13,11 @@ class StatsViewController: UIViewController {
 
     let transactionLineChart = TransactionLineChart()
 
-    lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
-        let request = NSFetchRequest<Transaction>(entityName: String(describing: Transaction.self))
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)]
+    lazy var fetchedResultsController: NSFetchedResultsController<TransactionStats> = {
+        let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(TransactionStats.date), ascending: false)]
         let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
-        let fetchedResultsController = NSFetchedResultsController<Transaction>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: #keyPath(Transaction.createdAtDay), cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController<TransactionStats>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
 
         return fetchedResultsController
@@ -40,12 +40,12 @@ class StatsViewController: UIViewController {
 
         try! fetchedResultsController.performFetch()
 
-//        transactionLineChart.transactions = fetchedResultsController.fetchedObjects
+        transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
     }
 }
 
 extension StatsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        transactionLineChart.transactions = controller.fetchedObjects as? [Transaction]
+        transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
     }
 }

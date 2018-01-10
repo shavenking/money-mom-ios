@@ -140,6 +140,27 @@ class CreateTransactionViewController: QuickCreateViewController {
         }
         transaction.quickRecord = quickRecord
 
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let midnight = calendar.startOfDay(for: transaction.createdAt)
+        let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
+        request.predicate = NSPredicate(format: "\(#keyPath(TransactionStats.date)) = %@", argumentArray: [midnight])
+        guard let transactionStat = try! viewContext.fetch(request).first(where: {
+            return $0.type == transaction.type
+        }) else {
+            let transactionStat = NSEntityDescription.insertNewObject(forEntityName: String(describing: TransactionStats.self), into: viewContext) as! TransactionStats
+
+            transactionStat.amount = transaction.amount
+            transactionStat.date = midnight
+            transactionStat.type = transaction.type
+
+            try! viewContext.save()
+            navigationController?.popToRootViewController(animated: true)
+
+            return
+        }
+
+        transactionStat.amount = transactionStat.amount.adding(transaction.amount)
         try! viewContext.save()
 
         navigationController?.popToRootViewController(animated: true)

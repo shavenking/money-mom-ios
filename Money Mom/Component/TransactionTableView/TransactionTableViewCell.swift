@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import CoreData
 
 protocol TransactionTableViewCellDelegate {
     func userWannaEdit(transaction: Transaction)
@@ -295,6 +296,22 @@ extension TransactionTableViewCell {
             if finished {
                 let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
                 viewContext.delete(transaction)
+
+                var calendar = Calendar.current
+                calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+                let midnight = calendar.startOfDay(for: transaction.createdAt)
+                let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
+                request.predicate = NSPredicate(format: "\(#keyPath(TransactionStats.date)) = %@", argumentArray: [midnight])
+                if let transactionStat = try! viewContext.fetch(request).first(where: {
+                    return $0.type == transaction.type
+                }) {
+                    transactionStat.amount = transactionStat.amount.subtracting(transaction.amount)
+
+                    if transactionStat.amount.compare(NSDecimalNumber.zero) == .orderedAscending {
+                        transactionStat.amount = .zero
+                    }
+                }
+
                 try! viewContext.save()
             }
         }
