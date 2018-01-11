@@ -21,10 +21,10 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     var delegate: TagCollectionViewCellDelegate?
 
-    var tagData: String? {
+    var tagData: Tag? {
         didSet {
             if let tagData = self.tagData {
-                label.text = tagData
+                label.text = tagData.name
                 label.sizeToFit()
             }
         }

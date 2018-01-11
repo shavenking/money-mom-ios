@@ -50,7 +50,7 @@ class TransactionTableViewCell: UITableViewCell {
         }
     }
 
-    var tags = Set<String>() {
+    var tags = Set<Tag>() {
         didSet {
             if tags.isEmpty {
                 tagCollectionView.backgroundColor = MMColor.black.withAlphaComponent(0.1)

@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-@objc class TransactionStats: NSManagedObject {
+@objc class TransactionStats: NSManagedObject, Taggable {
     func fetchRequest() -> NSFetchRequest<TransactionStats> {
         return NSFetchRequest<TransactionStats>(entityName: "TransactionStats")
     }
@@ -9,4 +9,5 @@ import CoreData
     @NSManaged var date: Date
     @NSManaged var amount: NSDecimalNumber
     @NSManaged var type: TransactionType
+    @NSManaged var tags: Set<Tag>
 }

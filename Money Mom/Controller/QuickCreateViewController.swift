@@ -40,7 +40,7 @@ class QuickCreateViewController: UIViewController {
 
     var player: AVAudioPlayer?
 
-    var tags = Set<String>()
+    var tags = Set<Tag>()
     var tagTextFieldText = ""
     var startCreatingTags = false
 
@@ -151,6 +151,12 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
 
 extension QuickCreateViewController: TagTextFieldDelegate {
     func didAdd(tag: String) {
+        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+
+        guard let tag = NSEntityDescription.insertNewObject(forEntityName: String(describing: Tag.self), into: viewContext) as? Tag else {
+            fatalError("Insert Tag Failed")
+        }
+
         tags.insert(tag)
         tagCollectionView.reloadData()
     }
@@ -164,6 +170,9 @@ extension QuickCreateViewController: TagTextFieldDelegate {
 extension QuickCreateViewController: TagCollectionViewCellDelegate {
     func didTouchButton(in tag: TagCollectionViewCell) {
         if let tag = tag.tagData {
+            let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+
+            viewContext.delete(tag)
             tags.remove(tag)
             tagCollectionView.reloadData()
         }
