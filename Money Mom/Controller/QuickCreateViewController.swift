@@ -150,14 +150,21 @@ extension QuickCreateViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension QuickCreateViewController: TagTextFieldDelegate {
-    func didAdd(tag: String) {
+    func didAdd(tagName: String) {
         let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+        let request = NSFetchRequest<Tag>(entityName: String(describing: Tag.self))
+        request.predicate = NSPredicate(format: "\(#keyPath(Tag.name)) = %@", argumentArray: [tagName])
 
-        guard let tag = NSEntityDescription.insertNewObject(forEntityName: String(describing: Tag.self), into: viewContext) as? Tag else {
-            fatalError("Insert Tag Failed")
+        let tags = try! viewContext.fetch(request)
+
+        if tags.isEmpty {
+            let tag = NSEntityDescription.insertNewObject(forEntityName: String(describing: Tag.self), into: viewContext) as! Tag
+            tag.name = tagName
+            self.tags.insert(tag)
+        } else {
+            self.tags.insert(tags.first!)
         }
 
-        tags.insert(tag)
         tagCollectionView.reloadData()
     }
 

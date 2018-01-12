@@ -1,7 +1,7 @@
 import UIKit
 
 @objc protocol TagTextFieldDelegate {
-    func didAdd(tag: String)
+    func didAdd(tagName: String)
     func didChange(text: String)
     @objc optional func didEndEditing()
 }
@@ -60,7 +60,7 @@ extension TagTextFieldCollectionViewCell: UITextFieldDelegate {
             return false
         }
 
-        delegate?.didAdd(tag: text.trimmingCharacters(in: .whitespacesAndNewlines))
+        delegate?.didAdd(tagName: text.trimmingCharacters(in: .whitespacesAndNewlines))
 
         textField.text = ""
         delegate?.didChange(text: "")

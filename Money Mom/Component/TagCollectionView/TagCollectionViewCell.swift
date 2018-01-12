@@ -45,6 +45,13 @@ class TagCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        backgroundColor = MMColor.blue
+        label.textColor = MMColor.white
+    }
+
     internal func addSubviews() {
         contentView.addSubview(label)
         contentView.addSubview(button)
@@ -66,5 +73,21 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     @objc private func didTouchButton() {
         delegate?.didTouchButton(in: self)
+    }
+}
+
+extension TagCollectionViewCell {
+    func setGray() {
+        backgroundColor = MMColor.black.withAlphaComponent(0.1)
+        label.textColor = MMColor.black
+    }
+
+    func setSelected() {
+        backgroundColor = MMColor.blue
+        label.textColor = MMColor.white
+    }
+
+    func deselect() {
+        setGray()
     }
 }
