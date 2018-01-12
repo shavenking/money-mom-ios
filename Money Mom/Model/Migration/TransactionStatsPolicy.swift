@@ -11,7 +11,7 @@ final class TransactionStatsPolicy: NSEntityMigrationPolicy {
     override func createDestinationInstances(forSource sInstance: NSManagedObject, in mapping: NSEntityMapping, manager: NSMigrationManager) throws {
         let midnight = calendar.startOfDay(for: sInstance.value(forKey: "createdAt") as! Date)
         let request = NSFetchRequest<NSManagedObject>(entityName: mapping.destinationEntityName!)
-        request.predicate = NSPredicate(format: "\(#keyPath(TransactionStats.date)) = %@", argumentArray: [midnight])
+        request.predicate = NSPredicate(format: "date = %@", argumentArray: [midnight])
         guard let transactionStat = try! manager.destinationContext.fetch(request).first(where: {
             return $0.value(forKey: "type") as! TransactionType == sInstance.value(forKey: "type") as! TransactionType
         }) else {

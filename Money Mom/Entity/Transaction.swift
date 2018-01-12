@@ -26,14 +26,19 @@ extension TransactionType {
     }
 }
 
-class Transaction: QuickRecordBase {
-    func fetchRequest() -> NSFetchRequest<Transaction> {
-        return NSFetchRequest<Transaction>(entityName: "Transaction")
-    }
+@objc enum TransactionTypeEnum: Int16 {
+    case INCOME = 0
+    case EXPENSE = 1
+    case UNKNOWN = 2
+}
 
-    @NSManaged var location: String
-    @NSManaged var type: TransactionType
-    @NSManaged var quickRecord: QuickRecord?
+class Transaction: NSManagedObject {
+    @NSManaged var amount: NSDecimalNumber
+    @NSManaged var audioUUID: UUID?
+    @NSManaged var date: Date
+    @NSManaged var location: String?
+    @NSManaged var tags: Set<Tag>
+    @NSManaged var type: TransactionTypeEnum
 
     @objc var createdAtDay: String {
         get {
@@ -41,8 +46,11 @@ class Transaction: QuickRecordBase {
             formatter.dateStyle = .medium
             formatter.timeStyle = .none
             formatter.timeZone = TimeZone.current
-            return formatter.string(from: createdAt)
+            return formatter.string(from: date)
         }
     }
 
+    override var hashValue: Int {
+        return objectID.hashValue
+    }
 }

@@ -79,19 +79,25 @@ class TransactionTableViewCell: UITableViewCell {
             amountLabel.text = "$\(transaction.amount == NSDecimalNumber.notANumber ? NSDecimalNumber.zero : transaction.amount)"
             tags = transaction.tags
 
-            if transaction.type == .INCOME {
+            switch transaction.type {
+            case .UNKNOWN:
+                amountLabel.textColor = MMColor.white
+                amountLabel.backgroundColor = MMColor.black
+                playButton.setTitleColor(MMColor.white, for: .normal)
+                playButton.backgroundColor = MMColor.black
+            case .INCOME:
                 amountLabel.textColor = MMColor.black
                 amountLabel.backgroundColor = MMColor.green
                 playButton.setTitleColor(MMColor.black, for: .normal)
                 playButton.backgroundColor = MMColor.green
-            } else {
+            case .EXPENSE:
                 amountLabel.textColor = MMColor.white
                 amountLabel.backgroundColor = MMColor.red
                 playButton.setTitleColor(MMColor.white, for: .normal)
                 playButton.backgroundColor = MMColor.red
             }
 
-            if let audioFilePath = MMConfig.audioFilePath(of: transaction.audioUUID) {
+            if let audioUUID = transaction.audioUUID, let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
                     player?.delegate = self
@@ -296,21 +302,6 @@ extension TransactionTableViewCell {
             if finished {
                 let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
                 viewContext.delete(transaction)
-
-                var calendar = Calendar.current
-                calendar.timeZone = TimeZone(secondsFromGMT: 0)!
-                let midnight = calendar.startOfDay(for: transaction.createdAt)
-                let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
-                request.predicate = NSPredicate(format: "\(#keyPath(TransactionStats.date)) = %@", argumentArray: [midnight])
-                if let transactionStat = try! viewContext.fetch(request).first(where: {
-                    return $0.type == transaction.type
-                }) {
-                    transactionStat.amount = transactionStat.amount.subtracting(transaction.amount)
-
-                    if transactionStat.amount.compare(NSDecimalNumber.zero) == .orderedAscending {
-                        transactionStat.amount = .zero
-                    }
-                }
 
                 try! viewContext.save()
             }

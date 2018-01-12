@@ -14,8 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController = UITabBarController()
         rootViewController.viewControllers = [
-            UINavigationController(rootViewController: HomeViewController()),
-            UINavigationController(rootViewController: TransactionHomeViewController()),
+            UINavigationController(rootViewController: TransactionViewController()),
             UINavigationController(rootViewController: StatsViewController())
         ]
         window?.rootViewController = rootViewController

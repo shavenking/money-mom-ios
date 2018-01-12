@@ -21,7 +21,7 @@ class Version3ToVersion4MigrationPolicy: NSEntityMigrationPolicy {
             ]
 
             let request = NSFetchRequest<NSManagedObject>(entityName: String(describing: Transaction.self))
-            request.predicate = NSPredicate(format: "\(#keyPath(Transaction.createdAt)) >= %@ AND \(#keyPath(Transaction.createdAt)) < %@", argumentArray: dateRange)
+            request.predicate = NSPredicate(format: "createdAt >= %@ AND createdAt < %@", argumentArray: dateRange)
 
             let sTransactions = try! manager.sourceContext.fetch(request)
 

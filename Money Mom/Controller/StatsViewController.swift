@@ -24,21 +24,21 @@ class StatsViewController: UIViewController {
 
     var selectedTags = Set<Tag>() {
         didSet {
-            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "ANY \(#keyPath(TransactionStats.tags)) IN %@", argumentArray: [selectedTags])
-            try! fetchedResultsController.performFetch()
-            transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
+//            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "ANY \(#keyPath(TransactionStats.tags)) IN %@", argumentArray: [selectedTags])
+//            try! fetchedResultsController.performFetch()
+//            transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
         }
     }
 
-    lazy var fetchedResultsController: NSFetchedResultsController<TransactionStats> = {
-        let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(TransactionStats.date), ascending: false)]
-        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
-        let fetchedResultsController = NSFetchedResultsController<TransactionStats>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultsController.delegate = self
-
-        return fetchedResultsController
-    }()
+//    lazy var fetchedResultsController: NSFetchedResultsController<TransactionStats> = {
+//        let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
+//        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(TransactionStats.date), ascending: false)]
+//        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+//        let fetchedResultsController = NSFetchedResultsController<TransactionStats>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+//        fetchedResultsController.delegate = self
+//
+//        return fetchedResultsController
+//    }()
 
     lazy var tagFetchedResultsController: NSFetchedResultsController<Tag> = {
         let request = NSFetchRequest<Tag>(entityName: String(describing: Tag.self))
@@ -70,19 +70,19 @@ class StatsViewController: UIViewController {
         tagCollectionView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor).isActive = true
         tagCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
-        try! fetchedResultsController.performFetch()
+//        try! fetchedResultsController.performFetch()
         try! tagFetchedResultsController.performFetch()
 
-        transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
+//        transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
         tagCollectionView.reloadData()
     }
 }
 
 extension StatsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if controller.fetchRequest.entityName == String(describing: TransactionStats.self) {
-            transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
-        }
+//        if controller.fetchRequest.entityName == String(describing: TransactionStats.self) {
+//            transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
+//        }
 
         if controller.fetchRequest.entityName == String(describing: Tag.self) {
             tagCollectionView.reloadData()

@@ -2,11 +2,7 @@ import UIKit
 import AVFoundation
 import CoreData
 
-protocol UnderstandHowToCreateTransaction {
-    func userWannaCreateTransactionFrom(quickRecord: QuickRecord)
-}
-
-class TransactionHomeViewController: UIViewController {
+class TransactionViewController: UIViewController {
     override var title: String? {
         get {
             return super.title ?? "收支記錄"
@@ -25,7 +21,7 @@ class TransactionHomeViewController: UIViewController {
 
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let request = NSFetchRequest<Transaction>(entityName: String(describing: Transaction.self))
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Transaction.date), ascending: false)]
         let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
         let fetchedResultsController = NSFetchedResultsController<Transaction>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: #keyPath(Transaction.createdAtDay), cacheName: nil)
         fetchedResultsController.delegate = self
@@ -54,7 +50,7 @@ class TransactionHomeViewController: UIViewController {
 //    }
 }
 
-extension TransactionHomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension TransactionViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else {
             return 0
@@ -123,20 +119,14 @@ extension TransactionHomeViewController: UITableViewDataSource, UITableViewDeleg
     }
 }
 
-extension TransactionHomeViewController: NSFetchedResultsControllerDelegate {
+extension TransactionViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         transactionTableView.reloadData()
     }
 }
 
-extension TransactionHomeViewController: TransactionTableViewCellDelegate {
+extension TransactionViewController: TransactionTableViewCellDelegate {
     func userWannaEdit(transaction: Transaction) {
         dump("bla bla bla...")
-    }
-}
-
-extension TransactionHomeViewController: UnderstandHowToCreateTransaction {
-    func userWannaCreateTransactionFrom(quickRecord: QuickRecord) {
-        navigationController?.pushViewController(CreateTransactionViewController(quickRecord: quickRecord), animated: true)
     }
 }
