@@ -13,8 +13,30 @@ class StatsViewController: UIViewController {
 
     let transactionLineChart = TransactionLineChart()
 
+    let incomeTotalLabel: UILabel = {
+        let label = UILabel()
+        label.layer.cornerRadius = 4
+        label.layer.masksToBounds = true
+        label.backgroundColor = MMColor.green
+        label.textColor = MMColor.black
+        label.textAlignment = .center
+        label.text = "0"
+        return label
+    }()
+
+    let expenseTotalLabel: UILabel = {
+        let label = UILabel()
+        label.layer.cornerRadius = 4
+        label.layer.masksToBounds = true
+        label.backgroundColor = MMColor.red
+        label.textColor = MMColor.white
+        label.textAlignment = .center
+        label.text = "0"
+        return label
+    }()
+
     lazy var tagCollectionView: TagCollectionView = {
-        var tagCollectionView = TagCollectionView.horizontalLayout()
+        var tagCollectionView = TagCollectionView()
         tagCollectionView.dataSource = self
         tagCollectionView.delegate = self
         tagCollectionView.allowsMultipleSelection = true
@@ -24,21 +46,26 @@ class StatsViewController: UIViewController {
 
     var selectedTags = Set<Tag>() {
         didSet {
-//            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "ANY \(#keyPath(TransactionStats.tags)) IN %@", argumentArray: [selectedTags])
-//            try! fetchedResultsController.performFetch()
-//            transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
+            if selectedTags.isEmpty {
+                transactionFetchedResultsController.fetchRequest.predicate = nil
+            } else {
+                transactionFetchedResultsController.fetchRequest.predicate = NSPredicate(format: "ANY \(#keyPath(Transaction.tags)) IN %@", argumentArray: [selectedTags])
+            }
+            try! transactionFetchedResultsController.performFetch()
+            transactionLineChart.transactions = transactionFetchedResultsController.fetchedObjects
+            calculateTotal()
         }
     }
 
-//    lazy var fetchedResultsController: NSFetchedResultsController<TransactionStats> = {
-//        let request = NSFetchRequest<TransactionStats>(entityName: String(describing: TransactionStats.self))
-//        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(TransactionStats.date), ascending: false)]
-//        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
-//        let fetchedResultsController = NSFetchedResultsController<TransactionStats>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//
-//        return fetchedResultsController
-//    }()
+    @objc lazy var transactionFetchedResultsController: NSFetchedResultsController<Transaction> = {
+        let request = NSFetchRequest<Transaction>(entityName: String(describing: Transaction.self))
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Transaction.date), ascending: false)]
+        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer!.viewContext
+        let fetchedResultsController = NSFetchedResultsController<Transaction>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+
+        return fetchedResultsController
+    }()
 
     lazy var tagFetchedResultsController: NSFetchedResultsController<Tag> = {
         let request = NSFetchRequest<Tag>(entityName: String(describing: Tag.self))
@@ -57,32 +84,64 @@ class StatsViewController: UIViewController {
 
         view.addSubview(transactionLineChart)
         view.addSubview(tagCollectionView)
+        view.addSubview(incomeTotalLabel)
+        view.addSubview(expenseTotalLabel)
 
         transactionLineChart.translatesAutoresizingMaskIntoConstraints = false
         transactionLineChart.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        transactionLineChart.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 10).isActive = true
+        transactionLineChart.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 8).isActive = true
         transactionLineChart.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor).isActive = true
         transactionLineChart.heightAnchor.constraint(equalTo: transactionLineChart.widthAnchor, multiplier: 0.5).isActive = true
 
+        incomeTotalLabel.translatesAutoresizingMaskIntoConstraints = false
+        incomeTotalLabel.topAnchor.constraint(equalTo: transactionLineChart.bottomAnchor, constant: 8).isActive = true
+        incomeTotalLabel.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+        incomeTotalLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor, constant: -4).isActive = true
+        incomeTotalLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        expenseTotalLabel.translatesAutoresizingMaskIntoConstraints = false
+        expenseTotalLabel.topAnchor.constraint(equalTo: transactionLineChart.bottomAnchor, constant: 8).isActive = true
+        expenseTotalLabel.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor, constant: 4).isActive = true
+        expenseTotalLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor).isActive = true
+        expenseTotalLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
         tagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         tagCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        tagCollectionView.topAnchor.constraint(equalTo: transactionLineChart.bottomAnchor, constant: 10).isActive = true
+        tagCollectionView.topAnchor.constraint(equalTo: incomeTotalLabel.bottomAnchor, constant: 8).isActive = true
         tagCollectionView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor).isActive = true
-        tagCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        tagCollectionView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -8).isActive = true
 
-//        try! fetchedResultsController.performFetch()
+        try! transactionFetchedResultsController.performFetch()
         try! tagFetchedResultsController.performFetch()
 
-//        transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
+        transactionLineChart.transactions = transactionFetchedResultsController.fetchedObjects
         tagCollectionView.reloadData()
+
+        calculateTotal()
+    }
+
+    private func calculateTotal() {
+        var incomeTotal: NSDecimalNumber = .zero
+        var expenseTotal: NSDecimalNumber = .zero
+
+        transactionFetchedResultsController.fetchedObjects?.forEach { transaction in
+            if transaction.type == .INCOME {
+                incomeTotal = incomeTotal.adding(transaction.amount)
+            } else if transaction.type == .EXPENSE {
+                expenseTotal = expenseTotal.adding(transaction.amount)
+            }
+        }
+
+        incomeTotalLabel.text = incomeTotal.stringValue
+        expenseTotalLabel.text = expenseTotal.stringValue
     }
 }
 
 extension StatsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        if controller.fetchRequest.entityName == String(describing: TransactionStats.self) {
-//            transactionLineChart.transactionStatsSet = fetchedResultsController.fetchedObjects
-//        }
+        if controller.fetchRequest.entityName == String(describing: Transaction.self) {
+            transactionLineChart.transactions = transactionFetchedResultsController.fetchedObjects
+        }
 
         if controller.fetchRequest.entityName == String(describing: Tag.self) {
             tagCollectionView.reloadData()
