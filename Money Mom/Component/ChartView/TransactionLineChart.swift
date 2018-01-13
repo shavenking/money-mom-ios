@@ -67,7 +67,7 @@ class TransactionLineChart: UIView {
     }
 
     private func drawExpense(in rect: CGRect) {
-        guard let expenses = expenses(), let maxAmount = maxAmount(), let minDate = minDate(), let maxDate = maxDate() else {
+        guard let expenses = expenses(), !expenses.isEmpty, let maxAmount = maxAmount(), let minDate = minDate(), let maxDate = maxDate() else {
             return
         }
 
@@ -100,7 +100,7 @@ class TransactionLineChart: UIView {
     }
 
     private func drawIncome(in rect: CGRect) {
-        guard let incomes = incomes(), let maxAmount = maxAmount(), let minDate = minDate(), let maxDate = maxDate() else {
+        guard let incomes = incomes(), !incomes.isEmpty, let maxAmount = maxAmount(), let minDate = minDate(), let maxDate = maxDate() else {
             return
         }
 
