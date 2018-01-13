@@ -12,11 +12,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.tintColor = MMColor.black
 
         window = UIWindow(frame: UIScreen.main.bounds)
+        let transactionViewController = UINavigationController(rootViewController: TransactionViewController())
+        transactionViewController.tabBarItem = UITabBarItem(title: "收支記錄", image: UIImage(named: "dollar-black"), selectedImage: UIImage(named: "dollar-black"))
+        let statsViewController = UINavigationController(rootViewController: StatsViewController())
+        statsViewController.tabBarItem = UITabBarItem(title: "統計圖表", image: UIImage(named: "pie-chart-black"), selectedImage: UIImage(named: "pie-chart-black"))
         let rootViewController = UITabBarController()
-        rootViewController.viewControllers = [
-            UINavigationController(rootViewController: TransactionViewController()),
-            UINavigationController(rootViewController: StatsViewController())
-        ]
+        rootViewController.tabBar.tintColor = MMColor.blue
+        rootViewController.viewControllers = [transactionViewController, statsViewController]
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
 
