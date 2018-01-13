@@ -13,6 +13,7 @@ class AmountTextField: UITextField {
         leftViewMode = .always
         textColor = MMColor.black
         backgroundColor = MMColor.white
+        keyboardType = .decimalPad
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -34,7 +34,7 @@ class TransactionViewController: UIViewController {
 
         view.backgroundColor = MMColor.white
 
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showQuickCreateViewController))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showTransactionCreateViewController))
 
         view.addSubview(transactionTableView)
         transactionTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,9 +45,9 @@ class TransactionViewController: UIViewController {
         try! fetchedResultsController.performFetch()
     }
 
-//    @objc func showQuickCreateViewController() {
-//        navigationController?.pushViewController(QuickCreateViewController(), animated: true)
-//    }
+    @objc func showTransactionCreateViewController() {
+        navigationController?.pushViewController(TransactionCreateViewController(), animated: true)
+    }
 }
 
 extension TransactionViewController: UITableViewDataSource, UITableViewDelegate {
@@ -92,7 +92,7 @@ extension TransactionViewController: UITableViewDataSource, UITableViewDelegate 
 
             if transaction.type == .INCOME {
                 totalIncome = totalIncome.adding(transaction.amount)
-            } else {
+            } else if transaction.type == .EXPENSE {
                 totalExpense = totalExpense.adding(transaction.amount)
             }
         }
@@ -127,6 +127,6 @@ extension TransactionViewController: NSFetchedResultsControllerDelegate {
 
 extension TransactionViewController: TransactionTableViewCellDelegate {
     func userWannaEdit(transaction: Transaction) {
-        dump("bla bla bla...")
+        navigationController?.pushViewController(TransactionCreateViewController(transaction: transaction), animated: true)
     }
 }

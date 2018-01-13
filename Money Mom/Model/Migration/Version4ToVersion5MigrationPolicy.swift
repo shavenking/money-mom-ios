@@ -12,7 +12,7 @@ class Version4ToVersion5MigrationPolicy: NSEntityMigrationPolicy {
         case "Transaction":
             let dInstance = NSEntityDescription.insertNewObject(forEntityName: mapping.destinationEntityName!, into: manager.destinationContext)
             dInstance.setValue(sInstance.value(forKey: "amount"), forKey: "amount")
-            if FileManager.default.fileExists(atPath: MMConfig.audioFilePath(of: sInstance.value(forKey: "audioUUID") as! UUID)!.path) {
+            if FileManager.default.fileExists(atPath: MMConfig.audioFileURL(of: sInstance.value(forKey: "audioUUID") as! UUID)!.path) {
                 dInstance.setValue(sInstance.value(forKey: "audioUUID"), forKey: "audioUUID")
             }
             dInstance.setValue(sInstance.value(forKey: "createdAt"), forKey: "date")
@@ -27,7 +27,7 @@ class Version4ToVersion5MigrationPolicy: NSEntityMigrationPolicy {
 
             let dInstance = NSEntityDescription.insertNewObject(forEntityName: mapping.destinationEntityName!, into: manager.destinationContext)
             dInstance.setValue(sInstance.value(forKey: "amount"), forKey: "amount")
-            if FileManager.default.fileExists(atPath: MMConfig.audioFilePath(of: sInstance.value(forKey: "audioUUID") as! UUID)!.path) {
+            if FileManager.default.fileExists(atPath: MMConfig.audioFileURL(of: sInstance.value(forKey: "audioUUID") as! UUID)!.path) {
                 dInstance.setValue(sInstance.value(forKey: "audioUUID"), forKey: "audioUUID")
             }
             dInstance.setValue(sInstance.value(forKey: "createdAt"), forKey: "date")

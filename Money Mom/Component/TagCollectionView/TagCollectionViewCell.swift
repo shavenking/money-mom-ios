@@ -1,13 +1,13 @@
 import UIKit
 
 protocol TagCollectionViewCellDelegate {
-    func didTouchButton(in tag: TagCollectionViewCell)
+    func didTouchButton(in: TagCollectionViewCell)
 }
 
 class TagCollectionViewCell: UICollectionViewCell {
     let label: UILabel = {
         let label = UILabel()
-        label.textColor = MMColor.white
+        label.textColor = MMColor.black
         return label
     }()
 
@@ -38,7 +38,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 4
         layer.masksToBounds = true
 
-        backgroundColor = MMColor.blue
+        backgroundColor = MMColor.black.withAlphaComponent(0.1)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -48,8 +48,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        backgroundColor = MMColor.blue
-        label.textColor = MMColor.white
+        backgroundColor = MMColor.black.withAlphaComponent(0.1)
+        label.textColor = MMColor.black
     }
 
     internal func addSubviews() {

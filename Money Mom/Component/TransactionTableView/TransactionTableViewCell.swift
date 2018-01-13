@@ -82,9 +82,9 @@ class TransactionTableViewCell: UITableViewCell {
             switch transaction.type {
             case .UNKNOWN:
                 amountLabel.textColor = MMColor.white
-                amountLabel.backgroundColor = MMColor.black
+                amountLabel.backgroundColor = MMColor.black.withAlphaComponent(0.5)
                 playButton.setTitleColor(MMColor.white, for: .normal)
-                playButton.backgroundColor = MMColor.black
+                playButton.backgroundColor = MMColor.black.withAlphaComponent(0.5)
             case .INCOME:
                 amountLabel.textColor = MMColor.black
                 amountLabel.backgroundColor = MMColor.green
@@ -97,7 +97,7 @@ class TransactionTableViewCell: UITableViewCell {
                 playButton.backgroundColor = MMColor.red
             }
 
-            if let audioUUID = transaction.audioUUID, let audioFilePath = MMConfig.audioFilePath(of: audioUUID) {
+            if let audioUUID = transaction.audioUUID, let audioFilePath = MMConfig.audioFileURL(of: audioUUID) {
                 do {
                     player = try AVAudioPlayer(contentsOf: audioFilePath)
                     player?.delegate = self
@@ -209,6 +209,7 @@ class TransactionTableViewCell: UITableViewCell {
         super.prepareForReuse()
 
         mainViewLeftAnchor?.constant = 0
+        player = nil
     }
 }
 

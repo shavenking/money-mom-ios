@@ -26,13 +26,13 @@ class RecordButton: UIButton {
     }
 
     func setDefaultStyle() {
-        setTitle("按住我錄音", for: .normal)
+        setTitle("錄音", for: .normal)
         setTitleColor(MMColor.white, for: .normal)
         backgroundColor = MMColor.black
     }
 
     func setStyleForRecording() {
-        setTitle("放開結束錄音", for: .normal)
+        setTitle("錄音", for: .normal)
         setTitleColor(MMColor.white, for: .normal)
         backgroundColor = MMColor.red
     }

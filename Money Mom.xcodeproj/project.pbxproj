@@ -15,17 +15,14 @@
 		2D6DFD4C1FF4830300E362E1 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DFD4A1FF4830300E362E1 /* Model.xcdatamodeld */; };
 		2D8927C32005F90100832462 /* Version3ToVersion4MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8927C22005F90100832462 /* Version3ToVersion4MigrationPolicy.swift */; };
 		2DFBE597200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBE596200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift */; };
-		69D600B145CF493697AC1A41 /* TransactionHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D606D54A33650154C87C92 /* TransactionHomeViewController.swift */; };
+		69D600B145CF493697AC1A41 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D606D54A33650154C87C92 /* TransactionViewController.swift */; };
 		69D6013597EB8818389112F7 /* Model1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 69D601E0420F250A16DC69AA /* Model1-2.xcmappingmodel */; };
 		69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */; };
 		69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6094CEF6424B731247185 /* MMConfig.swift */; };
 		69D6019858BA70638C91CFB5 /* MoneyMomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6010B52F883B94A51B215 /* MoneyMomView.swift */; };
-		69D601D6701D4D9A5E75EC62 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60DC3645798317C910CFD /* HomeViewController.swift */; };
 		69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6084BCF294D8C618FDBAA /* RecordButton.swift */; };
 		69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6036D305C7BE89DBF9010 /* TagCollectionViewFlowLayout.swift */; };
 		69D6037F06984DD811589B55 /* StringAmountToDecimalAmountPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6067D5D09727721490778 /* StringAmountToDecimalAmountPolicy.swift */; };
-		69D603B0EEDE6E7D789210CD /* QuickCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */; };
-		69D604CD046BC2ADA6BC2713 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D601B7591FB79ABE14EDF2 /* CreateTransactionViewController.swift */; };
 		69D604F5E0044D5A929762ED /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */; };
 		69D605C94A997CC229F79307 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D602E8284A66ACAD6E6D6C /* StatsViewController.swift */; };
 		69D605D5E36DFFA0A662D07F /* Model2-3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 69D60E7057B3A8E3C5A0F2E7 /* Model2-3.xcmappingmodel */; };
@@ -39,6 +36,7 @@
 		69D60BEF763AC96F403A75EE /* TransactionLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D605F6B9E7356CC2258A42 /* TransactionLineChart.swift */; };
 		69D60CAF1893F08773A956E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6083BCE88C96E8CBFCFAB /* Tag.swift */; };
 		69D60DC094534849B6EAD913 /* TransactionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D605974039AB75BF798D49 /* TransactionTableHeaderView.swift */; };
+		69D60DDA54CB5A46B0D52F2B /* TransactionCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60C4B7ACD4CE7604FC01C /* TransactionCreateViewController.swift */; };
 		69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */; };
 		69D60E34D6BD9AEE4E7CC9C8 /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6046DC285DE4948DE065E /* AmountLabel.swift */; };
 		69D60ECFD60C5EC8BACACB68 /* MMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60AD6C648502F3B79F564 /* MMColor.swift */; };
@@ -66,7 +64,6 @@
 		69D6010F5335369A619B0101 /* PlayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableViewCell.swift; sourceTree = "<group>"; };
 		69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableView.swift; sourceTree = "<group>"; };
-		69D601B7591FB79ABE14EDF2 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
 		69D601E0420F250A16DC69AA /* Model1-2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "Model1-2.xcmappingmodel"; sourceTree = "<group>"; };
 		69D6026C866C57476E84C6F5 /* TransactionStatsPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionStatsPolicy.swift; sourceTree = "<group>"; };
 		69D602E8284A66ACAD6E6D6C /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -77,17 +74,16 @@
 		69D605A01BD1F398A1F8EF91 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		69D605F6B9E7356CC2258A42 /* TransactionLineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionLineChart.swift; sourceTree = "<group>"; };
 		69D6067D5D09727721490778 /* StringAmountToDecimalAmountPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringAmountToDecimalAmountPolicy.swift; sourceTree = "<group>"; };
-		69D606D54A33650154C87C92 /* TransactionHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHomeViewController.swift; sourceTree = "<group>"; };
+		69D606D54A33650154C87C92 /* TransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		69D6073F4E1647A8CF0D89A4 /* TagCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		69D6083BCE88C96E8CBFCFAB /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		69D6084BCF294D8C618FDBAA /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
-		69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickCreateViewController.swift; sourceTree = "<group>"; };
 		69D6094CEF6424B731247185 /* MMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMConfig.swift; sourceTree = "<group>"; };
 		69D60A2A313A58787DF9F847 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
 		69D60AD6C648502F3B79F564 /* MMColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMColor.swift; sourceTree = "<group>"; };
+		69D60C4B7ACD4CE7604FC01C /* TransactionCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCreateViewController.swift; sourceTree = "<group>"; };
 		69D60C6659CB4075847F6F86 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D60D60D4960E78E95A6E40 /* ReadOnlyTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadOnlyTagCollectionViewCell.swift; sourceTree = "<group>"; };
-		69D60DC3645798317C910CFD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		69D60DF64DBC78BCCF50E995 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		69D60E7057B3A8E3C5A0F2E7 /* Model2-3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "Model2-3.xcmappingmodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,11 +171,9 @@
 		69D6023775D4C6315D3DF30A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				69D60DC3645798317C910CFD /* HomeViewController.swift */,
-				69D6088470F69DED5047EAAF /* QuickCreateViewController.swift */,
-				69D601B7591FB79ABE14EDF2 /* CreateTransactionViewController.swift */,
-				69D606D54A33650154C87C92 /* TransactionHomeViewController.swift */,
+				69D606D54A33650154C87C92 /* TransactionViewController.swift */,
 				69D602E8284A66ACAD6E6D6C /* StatsViewController.swift */,
+				69D60C4B7ACD4CE7604FC01C /* TransactionCreateViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -357,9 +351,7 @@
 			files = (
 				2D2462911FE0FA8600713092 /* AppDelegate.swift in Sources */,
 				69D60ECFD60C5EC8BACACB68 /* MMColor.swift in Sources */,
-				69D601D6701D4D9A5E75EC62 /* HomeViewController.swift in Sources */,
 				2D3F912E2007B15500332DE0 /* Model3-4.xcmappingmodel in Sources */,
-				69D603B0EEDE6E7D789210CD /* QuickCreateViewController.swift in Sources */,
 				69D604F5E0044D5A929762ED /* TagCollectionViewCell.swift in Sources */,
 				2D6DFD4C1FF4830300E362E1 /* Model.xcdatamodeld in Sources */,
 				69D60F6ABE0138C6DAC95E80 /* TagTextFieldCollectionViewCell.swift in Sources */,
@@ -375,11 +367,10 @@
 				69D60E34D6BD9AEE4E7CC9C8 /* AmountLabel.swift in Sources */,
 				69D60EFD50AC6EFF6FF72E3C /* PlayButton.swift in Sources */,
 				2D8927C32005F90100832462 /* Version3ToVersion4MigrationPolicy.swift in Sources */,
-				69D604CD046BC2ADA6BC2713 /* CreateTransactionViewController.swift in Sources */,
 				69D6081F5799C42D5B0CC915 /* Transaction.swift in Sources */,
 				2D4594B12008E22D00845B7D /* Model4-5.xcmappingmodel in Sources */,
 				69D6037F06984DD811589B55 /* StringAmountToDecimalAmountPolicy.swift in Sources */,
-				69D600B145CF493697AC1A41 /* TransactionHomeViewController.swift in Sources */,
+				69D600B145CF493697AC1A41 /* TransactionViewController.swift in Sources */,
 				69D6089328B164CCDC0AB881 /* TransactionTableView.swift in Sources */,
 				69D6092AAC5FD0E1A0E03778 /* TransactionTableViewCell.swift in Sources */,
 				69D60DC094534849B6EAD913 /* TransactionTableHeaderView.swift in Sources */,
@@ -390,6 +381,7 @@
 				69D605D5E36DFFA0A662D07F /* Model2-3.xcmappingmodel in Sources */,
 				69D60B4411424F948D66BFD8 /* TransactionStatsPolicy.swift in Sources */,
 				69D60CAF1893F08773A956E7 /* Tag.swift in Sources */,
+				69D60DDA54CB5A46B0D52F2B /* TransactionCreateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
