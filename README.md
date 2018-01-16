@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/shavenking/money-mom-ios.svg?branch=master)](https://travis-ci.org/shavenking/money-mom-ios)
 
-![](v0.2.0.gif)
+![demo.gif](demo.gif)
 
 ## Money Mom 是什麼？
 
