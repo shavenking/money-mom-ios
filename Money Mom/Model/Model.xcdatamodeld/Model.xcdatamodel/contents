@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772"
+       systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift"
+       userDefinedModelVersionIdentifier="">
     <entity name="QuickRecord" representedClassName=".QuickRecord" syncable="YES">
         <attribute name="amount" attributeType="String" syncable="YES"/>
         <attribute name="audioUUID" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>

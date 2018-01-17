@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772"
+       systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift"
+       userDefinedModelVersionIdentifier="">
     <entity name="QuickRecord" representedClassName=".QuickRecord" syncable="YES">
         <attribute name="amount" attributeType="Decimal" syncable="YES"/>
         <attribute name="audioUUID" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isProcessed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="quickRecords" inverseEntity="Tag" syncable="YES"/>
-        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="quickRecord" inverseEntity="Transaction" syncable="YES"/>
+        <attribute name="isProcessed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"
+                   syncable="YES"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="quickRecords"
+                      inverseEntity="Tag" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify"
+                      destinationEntity="Transaction" inverseName="quickRecord" inverseEntity="Transaction"
+                      syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName=".Tag" syncable="YES">
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="quickRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuickRecord" inverseName="tags" inverseEntity="QuickRecord" syncable="YES"/>
-        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Transaction" inverseName="tags" inverseEntity="Transaction" syncable="YES"/>
-        <relationship name="transactionStatsSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TransactionStats" inverseName="tags" inverseEntity="TransactionStats" syncable="YES"/>
+        <relationship name="quickRecords" optional="YES" toMany="YES" deletionRule="Nullify"
+                      destinationEntity="QuickRecord" inverseName="tags" inverseEntity="QuickRecord" syncable="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify"
+                      destinationEntity="Transaction" inverseName="tags" inverseEntity="Transaction" syncable="YES"/>
+        <relationship name="transactionStatsSet" optional="YES" toMany="YES" deletionRule="Nullify"
+                      destinationEntity="TransactionStats" inverseName="tags" inverseEntity="TransactionStats"
+                      syncable="YES"/>
     </entity>
     <entity name="Transaction" representedClassName=".Transaction" syncable="YES">
         <attribute name="amount" attributeType="Decimal" syncable="YES"/>
@@ -22,14 +32,18 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" attributeType="String" syncable="YES"/>
         <attribute name="type" attributeType="Transformable" syncable="YES"/>
-        <relationship name="quickRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuickRecord" inverseName="transaction" inverseEntity="QuickRecord" syncable="YES"/>
-        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="transactions" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="quickRecord" optional="YES" maxCount="1" deletionRule="Nullify"
+                      destinationEntity="QuickRecord" inverseName="transaction" inverseEntity="QuickRecord"
+                      syncable="YES"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="transactions"
+                      inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="TransactionStats" representedClassName=".TransactionStats" syncable="YES">
         <attribute name="amount" attributeType="Decimal" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="type" attributeType="Transformable" customClassName="." syncable="YES"/>
-        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="transactionStatsSet" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag"
+                      inverseName="transactionStatsSet" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <elements>
         <element name="QuickRecord" positionX="-63" positionY="-18" width="128" height="150"/>

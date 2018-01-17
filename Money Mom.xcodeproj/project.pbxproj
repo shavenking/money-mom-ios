@@ -17,7 +17,6 @@
 		2DFBE597200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBE596200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift */; };
 		69D600B145CF493697AC1A41 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D606D54A33650154C87C92 /* TransactionViewController.swift */; };
 		69D6013597EB8818389112F7 /* Model1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 69D601E0420F250A16DC69AA /* Model1-2.xcmappingmodel */; };
-		69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */; };
 		69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6094CEF6424B731247185 /* MMConfig.swift */; };
 		69D6019858BA70638C91CFB5 /* MoneyMomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6010B52F883B94A51B215 /* MoneyMomView.swift */; };
 		69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6084BCF294D8C618FDBAA /* RecordButton.swift */; };
@@ -30,7 +29,6 @@
 		69D6081F5799C42D5B0CC915 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D605A01BD1F398A1F8EF91 /* Transaction.swift */; };
 		69D6089328B164CCDC0AB881 /* TransactionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */; };
 		69D6092AAC5FD0E1A0E03778 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60DF64DBC78BCCF50E995 /* TransactionTableViewCell.swift */; };
-		69D609814834B9A86D8C7D47 /* QuickRecordTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */; };
 		69D60B4411424F948D66BFD8 /* TransactionStatsPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6026C866C57476E84C6F5 /* TransactionStatsPolicy.swift */; };
 		69D60BDBC4A87DCDE73F03D4 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D60A2A313A58787DF9F847 /* AmountTextField.swift */; };
 		69D60BEF763AC96F403A75EE /* TransactionLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D605F6B9E7356CC2258A42 /* TransactionLineChart.swift */; };
@@ -59,10 +57,8 @@
 		2D8927C22005F90100832462 /* Version3ToVersion4MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version3ToVersion4MigrationPolicy.swift; sourceTree = "<group>"; };
 		2DC2FBD420088778001A2C0F /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
 		2DFBE596200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version4ToVersion5MigrationPolicy.swift; sourceTree = "<group>"; };
-		69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableView.swift; sourceTree = "<group>"; };
 		69D6010B52F883B94A51B215 /* MoneyMomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyMomView.swift; sourceTree = "<group>"; };
 		69D6010F5335369A619B0101 /* PlayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
-		69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickRecordTableViewCell.swift; sourceTree = "<group>"; };
 		69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableView.swift; sourceTree = "<group>"; };
 		69D601E0420F250A16DC69AA /* Model1-2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "Model1-2.xcmappingmodel"; sourceTree = "<group>"; };
 		69D6026C866C57476E84C6F5 /* TransactionStatsPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionStatsPolicy.swift; sourceTree = "<group>"; };
@@ -156,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				69D603FBDD7005D55280DA12 /* TagCollectionView */,
-				69D60A109F1D80D43B1D4C7A /* QuickRecordTableView */,
 				69D60C1D5040A1D4DB8D47A4 /* AmountTextField */,
 				69D60ABA17A5E25A604DF970 /* RecordButton */,
 				69D603BE3F04C0EFBF3A8BF5 /* AmountLabel */,
@@ -240,15 +235,6 @@
 				69D6010B52F883B94A51B215 /* MoneyMomView.swift */,
 			);
 			path = ForFun;
-			sourceTree = "<group>";
-		};
-		69D60A109F1D80D43B1D4C7A /* QuickRecordTableView */ = {
-			isa = PBXGroup;
-			children = (
-				69D6018C6742D0B960D3CED7 /* QuickRecordTableViewCell.swift */,
-				69D60030B0FB984D1C489378 /* QuickRecordTableView.swift */,
-			);
-			path = QuickRecordTableView;
 			sourceTree = "<group>";
 		};
 		69D60ABA17A5E25A604DF970 /* RecordButton */ = {
@@ -356,11 +342,9 @@
 				2D6DFD4C1FF4830300E362E1 /* Model.xcdatamodeld in Sources */,
 				69D60F6ABE0138C6DAC95E80 /* TagTextFieldCollectionViewCell.swift in Sources */,
 				69D60342493E9A4C6F8AA900 /* TagCollectionViewFlowLayout.swift in Sources */,
-				69D6013D7BD8C257F52E755E /* QuickRecordTableViewCell.swift in Sources */,
 				2DFBE597200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift in Sources */,
 				69D60E251C8C4D944CE095FC /* ReadOnlyTagCollectionViewCell.swift in Sources */,
 				69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */,
-				69D609814834B9A86D8C7D47 /* QuickRecordTableView.swift in Sources */,
 				69D60BDBC4A87DCDE73F03D4 /* AmountTextField.swift in Sources */,
 				69D6022B273C1AE68B74D332 /* RecordButton.swift in Sources */,
 				69D60805E4570E4EC3DB005B /* TagCollectionView.swift in Sources */,
