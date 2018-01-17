@@ -396,15 +396,19 @@ extension TransactionCreateViewController: UICollectionViewDataSource,
     }
     let request = NSFetchRequest<Tag>(entityName: String(describing: Tag.self))
     request.predicate = NSPredicate(format: "\(#keyPath(Tag.name)) = %@", argumentArray: [tagName])
-    if let tag = try viewContext.fetch(request).first {
-      tags.insert(tag)
-    } else {
-      guard let tag = NSEntityDescription.insertNewObject(forEntityName: String(describing: Tag.self),
-                                                    into: viewContext) as? Tag else {
-        fatalError("can not insert new Tag")
+    do {
+      if let tag = try viewContext.fetch(request).first {
+        tags.insert(tag)
+      } else {
+        guard let tag = NSEntityDescription.insertNewObject(forEntityName: String(describing: Tag.self),
+                                                            into: viewContext) as? Tag else {
+          fatalError("can not insert new Tag")
+        }
+        tag.name = tagName
+        tags.insert(tag)
       }
-      tag.name = tagName
-      tags.insert(tag)
+    } catch {
+      fatalError("can not fetch Tag from Core Data")
     }
     tagCollectionView.reloadData()
   }
