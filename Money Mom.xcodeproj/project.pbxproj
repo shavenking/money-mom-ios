@@ -15,6 +15,7 @@
 		2D6DFD4C1FF4830300E362E1 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DFD4A1FF4830300E362E1 /* Model.xcdatamodeld */; };
 		2D8927C32005F90100832462 /* Version3ToVersion4MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8927C22005F90100832462 /* Version3ToVersion4MigrationPolicy.swift */; };
 		2DFBE597200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBE596200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift */; };
+		2DFED0A92010456A00C58052 /* TransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFED0A82010456A00C58052 /* TransactionTests.swift */; };
 		69D600B145CF493697AC1A41 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D606D54A33650154C87C92 /* TransactionViewController.swift */; };
 		69D6013597EB8818389112F7 /* Model1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 69D601E0420F250A16DC69AA /* Model1-2.xcmappingmodel */; };
 		69D6016719A9EBF2258F30BD /* MMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6094CEF6424B731247185 /* MMConfig.swift */; };
@@ -42,6 +43,16 @@
 		69D60F6ABE0138C6DAC95E80 /* TagTextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D604C6C35C08D7E1DEB7E1 /* TagTextFieldCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2DFED0AB2010456A00C58052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D2462851FE0FA8600713092 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D24628C1FE0FA8600713092;
+			remoteInfo = "Money Mom";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2D24628D1FE0FA8600713092 /* Money Mom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Money Mom.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D2462901FE0FA8600713092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +68,9 @@
 		2D8927C22005F90100832462 /* Version3ToVersion4MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version3ToVersion4MigrationPolicy.swift; sourceTree = "<group>"; };
 		2DC2FBD420088778001A2C0F /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
 		2DFBE596200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version4ToVersion5MigrationPolicy.swift; sourceTree = "<group>"; };
+		2DFED0A62010456A00C58052 /* Money Mom UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Money Mom UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DFED0A82010456A00C58052 /* TransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTests.swift; sourceTree = "<group>"; };
+		2DFED0AA2010456A00C58052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69D6010B52F883B94A51B215 /* MoneyMomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyMomView.swift; sourceTree = "<group>"; };
 		69D6010F5335369A619B0101 /* PlayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		69D601B0B2A70F219FF1A32B /* TransactionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableView.swift; sourceTree = "<group>"; };
@@ -92,6 +106,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2DFED0A32010456A00C58052 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -99,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				2D24628F1FE0FA8600713092 /* Money Mom */,
+				2DFED0A72010456A00C58052 /* Money Mom UITests */,
 				2D24628E1FE0FA8600713092 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				2D24628D1FE0FA8600713092 /* Money Mom.app */,
+				2DFED0A62010456A00C58052 /* Money Mom UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,6 +159,15 @@
 				69D60E3E0E412586B43E5170 /* MappingModel */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2DFED0A72010456A00C58052 /* Money Mom UITests */ = {
+			isa = PBXGroup;
+			children = (
+				2DFED0A82010456A00C58052 /* TransactionTests.swift */,
+				2DFED0AA2010456A00C58052 /* Info.plist */,
+			);
+			path = "Money Mom UITests";
 			sourceTree = "<group>";
 		};
 		69D600FDE3D893E873D0BA6E /* TransactionTableView */ = {
@@ -284,6 +316,24 @@
 			productReference = 2D24628D1FE0FA8600713092 /* Money Mom.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2DFED0A52010456A00C58052 /* Money Mom UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2DFED0AD2010456A00C58052 /* Build configuration list for PBXNativeTarget "Money Mom UITests" */;
+			buildPhases = (
+				2DFED0A22010456A00C58052 /* Sources */,
+				2DFED0A32010456A00C58052 /* Frameworks */,
+				2DFED0A42010456A00C58052 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2DFED0AC2010456A00C58052 /* PBXTargetDependency */,
+			);
+			name = "Money Mom UITests";
+			productName = "Money Mom UITests";
+			productReference = 2DFED0A62010456A00C58052 /* Money Mom UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -297,6 +347,11 @@
 					2D24628C1FE0FA8600713092 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					2DFED0A52010456A00C58052 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2D24628C1FE0FA8600713092;
 					};
 				};
 			};
@@ -314,6 +369,7 @@
 			projectRoot = "";
 			targets = (
 				2D24628C1FE0FA8600713092 /* Money Mom */,
+				2DFED0A52010456A00C58052 /* Money Mom UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -325,6 +381,13 @@
 			files = (
 				2D24629B1FE0FA8600713092 /* LaunchScreen.storyboard in Resources */,
 				2D2462981FE0FA8600713092 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2DFED0A42010456A00C58052 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +432,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2DFED0A22010456A00C58052 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DFED0A92010456A00C58052 /* TransactionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2DFED0AC2010456A00C58052 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D24628C1FE0FA8600713092 /* Money Mom */;
+			targetProxy = 2DFED0AB2010456A00C58052 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2D2462991FE0FA8600713092 /* LaunchScreen.storyboard */ = {
@@ -522,6 +601,36 @@
 			};
 			name = Release;
 		};
+		2DFED0AE2010456A00C58052 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K89GKBEV27;
+				INFOPLIST_FILE = "Money Mom UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.shavenking.Money-Mom-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Money Mom";
+			};
+			name = Debug;
+		};
+		2DFED0AF2010456A00C58052 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K89GKBEV27;
+				INFOPLIST_FILE = "Money Mom UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.shavenking.Money-Mom-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Money Mom";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -539,6 +648,15 @@
 			buildConfigurations = (
 				2D2462A01FE0FA8600713092 /* Debug */,
 				2D2462A11FE0FA8600713092 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2DFED0AD2010456A00C58052 /* Build configuration list for PBXNativeTarget "Money Mom UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DFED0AE2010456A00C58052 /* Debug */,
+				2DFED0AF2010456A00C58052 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

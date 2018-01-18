@@ -28,7 +28,26 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2DFED0A52010456A00C58052"
+               BuildableName = "Money Mom UITests.xctest"
+               BlueprintName = "Money Mom UITests"
+               ReferencedContainer = "container:Money Mom.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2D24628C1FE0FA8600713092"
+            BuildableName = "Money Mom.app"
+            BlueprintName = "Money Mom"
+            ReferencedContainer = "container:Money Mom.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -62,6 +81,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2D24628C1FE0FA8600713092"
+            BuildableName = "Money Mom.app"
+            BlueprintName = "Money Mom"
+            ReferencedContainer = "container:Money Mom.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
