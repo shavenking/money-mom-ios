@@ -34,4 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     return true
   }
+
+  func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    dump(userActivity.activityType)
+    dump(userActivity.webpageURL)
+    return false
+  }
 }

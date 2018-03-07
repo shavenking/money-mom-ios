@@ -66,6 +66,7 @@
 		2D5D08CD1FFDCC610026400E /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		2D6DFD4B1FF4830300E362E1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2D8927C22005F90100832462 /* Version3ToVersion4MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version3ToVersion4MigrationPolicy.swift; sourceTree = "<group>"; };
+		2D8C01AB204F77B400E48BEA /* Money Mom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Money Mom.entitlements"; sourceTree = "<group>"; };
 		2DC2FBD420088778001A2C0F /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
 		2DFBE596200889B100D27A83 /* Version4ToVersion5MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version4ToVersion5MigrationPolicy.swift; sourceTree = "<group>"; };
 		2DFED0A62010456A00C58052 /* Money Mom UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Money Mom UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +138,7 @@
 		2D24628F1FE0FA8600713092 /* Money Mom */ = {
 			isa = PBXGroup;
 			children = (
+				2D8C01AB204F77B400E48BEA /* Money Mom.entitlements */,
 				2D2462901FE0FA8600713092 /* AppDelegate.swift */,
 				2D2462971FE0FA8600713092 /* Assets.xcassets */,
 				2D2462991FE0FA8600713092 /* LaunchScreen.storyboard */,
@@ -347,6 +349,11 @@
 					2D24628C1FE0FA8600713092 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					2DFED0A52010456A00C58052 = {
 						CreatedOnToolsVersion = 9.2;
@@ -573,6 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Money Mom/Money Mom.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K89GKBEV27;
 				INFOPLIST_FILE = "Money Mom/Info.plist";
@@ -589,6 +597,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Money Mom/Money Mom.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K89GKBEV27;
 				INFOPLIST_FILE = "Money Mom/Info.plist";
