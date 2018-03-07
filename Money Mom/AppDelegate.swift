@@ -40,4 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     dump(userActivity.webpageURL)
     return false
   }
+
+  func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+    dump(url)
+    return true
+  }
 }
